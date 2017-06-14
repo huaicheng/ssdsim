@@ -2,7 +2,7 @@
 This project was supported by the National Basic Research 973 Program of China under Grant No.2011CB302301
 Huazhong University of Science and Technology (HUST)   Wuhan National Laboratory for Optoelectronics
 
-FileName£º pagemap.h
+FileNameï¼š pagemap.h
 Author: Hu Yang		Version: 2.1	Date:2011/12/02
 Description: 
 
@@ -22,7 +22,7 @@ Hao Luo         2011/01/01        2.0           Change               luohao13568
 
 
 /************************************************
-*¶ÏÑÔ,µ±´ò¿ªÎÄ¼şÊ§°ÜÊ±£¬Êä³ö¡°open ÎÄ¼şÃû error¡±
+*æ–­è¨€,å½“æ‰“å¼€æ–‡ä»¶å¤±è´¥æ—¶ï¼Œè¾“å‡ºâ€œopen æ–‡ä»¶å errorâ€
 *************************************************/
 void file_assert(int error,char *s)
 {
@@ -33,9 +33,9 @@ void file_assert(int error,char *s)
 }
 
 /*****************************************************
-*¶ÏÑÔ,µ±ÉêÇëÄÚ´æ¿Õ¼äÊ§°ÜÊ±£¬Êä³ö¡°malloc ±äÁ¿Ãû error¡±
+*æ–­è¨€,å½“ç”³è¯·å†…å­˜ç©ºé—´å¤±è´¥æ—¶ï¼Œè¾“å‡ºâ€œmalloc å˜é‡å errorâ€
 ******************************************************/
-void alloc_assert(void *p,char *s)//¶ÏÑÔ
+void alloc_assert(void *p,char *s)//æ–­è¨€
 {
 	if(p!=NULL) return;
 	printf("malloc %s error\n",s);
@@ -44,11 +44,11 @@ void alloc_assert(void *p,char *s)//¶ÏÑÔ
 }
 
 /*********************************************************************************
-*¶ÏÑÔ
-*A£¬¶Áµ½µÄtime_t£¬device£¬lsn£¬size£¬ope¶¼<0Ê±£¬Êä³ö¡°trace error:.....¡±
-*B£¬¶Áµ½µÄtime_t£¬device£¬lsn£¬size£¬ope¶¼=0Ê±£¬Êä³ö¡°probable read a blank line¡±
+*æ–­è¨€
+*Aï¼Œè¯»åˆ°çš„time_tï¼Œdeviceï¼Œlsnï¼Œsizeï¼Œopeéƒ½<0æ—¶ï¼Œè¾“å‡ºâ€œtrace error:.....â€
+*Bï¼Œè¯»åˆ°çš„time_tï¼Œdeviceï¼Œlsnï¼Œsizeï¼Œopeéƒ½=0æ—¶ï¼Œè¾“å‡ºâ€œprobable read a blank lineâ€
 **********************************************************************************/
-void trace_assert(int64_t time_t,int device,unsigned int lsn,int size,int ope)//¶ÏÑÔ
+void trace_assert(int64_t time_t,int device,unsigned int lsn,int size,int ope)//æ–­è¨€
 {
 	if(time_t <0 || device < 0 || lsn < 0 || size < 0 || ope < 0)
 	{
@@ -65,8 +65,8 @@ void trace_assert(int64_t time_t,int device,unsigned int lsn,int size,int ope)//
 
 
 /************************************************************************************
-*º¯ÊıµÄ¹¦ÄÜÊÇ¸ù¾İÎïÀíÒ³ºÅppn²éÕÒ¸ÃÎïÀíÒ³ËùÔÚµÄchannel£¬chip£¬die£¬plane£¬block£¬page
-*µÃµ½µÄchannel£¬chip£¬die£¬plane£¬block£¬page·ÅÔÚ½á¹¹locationÖĞ²¢×÷Îª·µ»ØÖµ
+*å‡½æ•°çš„åŠŸèƒ½æ˜¯æ ¹æ®ç‰©ç†é¡µå·ppnæŸ¥æ‰¾è¯¥ç‰©ç†é¡µæ‰€åœ¨çš„channelï¼Œchipï¼Œdieï¼Œplaneï¼Œblockï¼Œpage
+*å¾—åˆ°çš„channelï¼Œchipï¼Œdieï¼Œplaneï¼Œblockï¼Œpageæ”¾åœ¨ç»“æ„locationä¸­å¹¶ä½œä¸ºè¿”å›å€¼
 *************************************************************************************/
 struct local *find_location(struct ssd_info *ssd,unsigned int ppn)
 {
@@ -91,8 +91,8 @@ struct local *find_location(struct ssd_info *ssd,unsigned int ppn)
 	page_channel=page_chip*ssd->parameter->chip_channel[0];
 	
 	/*******************************************************************************
-	*page_channelÊÇÒ»¸öchannelÖĞpageµÄÊıÄ¿£¬ ppn/page_channel¾ÍµÃµ½ÁËÔÚÄÄ¸öchannelÖĞ
-	*ÓÃÍ¬ÑùµÄ°ì·¨¿ÉÒÔµÃµ½chip£¬die£¬plane£¬block£¬page
+	*page_channelæ˜¯ä¸€ä¸ªchannelä¸­pageçš„æ•°ç›®ï¼Œ ppn/page_channelå°±å¾—åˆ°äº†åœ¨å“ªä¸ªchannelä¸­
+	*ç”¨åŒæ ·çš„åŠæ³•å¯ä»¥å¾—åˆ°chipï¼Œdieï¼Œplaneï¼Œblockï¼Œpage
 	********************************************************************************/
 	location->channel = ppn/page_channel;
 	location->chip = (ppn%page_channel)/page_chip;
@@ -106,22 +106,22 @@ struct local *find_location(struct ssd_info *ssd,unsigned int ppn)
 
 
 /*****************************************************************************
-*Õâ¸öº¯ÊıµÄ¹¦ÄÜÊÇ¸ù¾İ²ÎÊıchannel£¬chip£¬die£¬plane£¬block£¬page£¬ÕÒµ½¸ÃÎïÀíÒ³ºÅ
-*º¯ÊıµÄ·µ»ØÖµ¾ÍÊÇÕâ¸öÎïÀíÒ³ºÅ
+*è¿™ä¸ªå‡½æ•°çš„åŠŸèƒ½æ˜¯æ ¹æ®å‚æ•°channelï¼Œchipï¼Œdieï¼Œplaneï¼Œblockï¼Œpageï¼Œæ‰¾åˆ°è¯¥ç‰©ç†é¡µå·
+*å‡½æ•°çš„è¿”å›å€¼å°±æ˜¯è¿™ä¸ªç‰©ç†é¡µå·
 ******************************************************************************/
 unsigned int find_ppn(struct ssd_info * ssd,unsigned int channel,unsigned int chip,unsigned int die,unsigned int plane,unsigned int block,unsigned int page)
 {
 	unsigned int ppn=0;
 	unsigned int i=0;
 	int page_plane=0,page_die=0,page_chip=0;
-	int page_channel[100];                  /*Õâ¸öÊı×é´æ·ÅµÄÊÇÃ¿¸öchannelµÄpageÊıÄ¿*/
+	int page_channel[100];                  /*è¿™ä¸ªæ•°ç»„å­˜æ”¾çš„æ˜¯æ¯ä¸ªchannelçš„pageæ•°ç›®*/
 
 #ifdef DEBUG
 	printf("enter find_psn,channel:%d, chip:%d, die:%d, plane:%d, block:%d, page:%d\n",channel,chip,die,plane,block,page);
 #endif
     
 	/*********************************************
-	*¼ÆËã³öplane£¬die£¬chip£¬channelÖĞµÄpageµÄÊıÄ¿
+	*è®¡ç®—å‡ºplaneï¼Œdieï¼Œchipï¼Œchannelä¸­çš„pageçš„æ•°ç›®
 	**********************************************/
 	page_plane=ssd->parameter->page_block*ssd->parameter->block_plane;
 	page_die=page_plane*ssd->parameter->plane_die;
@@ -133,7 +133,7 @@ unsigned int find_ppn(struct ssd_info * ssd,unsigned int channel,unsigned int ch
 	}
 
     /****************************************************************************
-	*¼ÆËãÎïÀíÒ³ºÅppn£¬ppnÊÇchannel£¬chip£¬die£¬plane£¬block£¬pageÖĞpage¸öÊıµÄ×ÜºÍ
+	*è®¡ç®—ç‰©ç†é¡µå·ppnï¼Œppnæ˜¯channelï¼Œchipï¼Œdieï¼Œplaneï¼Œblockï¼Œpageä¸­pageä¸ªæ•°çš„æ€»å’Œ
 	*****************************************************************************/
 	i=0;
 	while(i<channel)
@@ -147,7 +147,7 @@ unsigned int find_ppn(struct ssd_info * ssd,unsigned int channel,unsigned int ch
 }
 
 /********************************
-*º¯Êı¹¦ÄÜÊÇ»ñµÃÒ»¸ö¶Á×ÓÇëÇóµÄ×´Ì¬
+*å‡½æ•°åŠŸèƒ½æ˜¯è·å¾—ä¸€ä¸ªè¯»å­è¯·æ±‚çš„çŠ¶æ€
 *********************************/
 int set_entry_state(struct ssd_info *ssd,unsigned int lsn,unsigned int size)
 {
@@ -161,8 +161,8 @@ int set_entry_state(struct ssd_info *ssd,unsigned int lsn,unsigned int size)
 }
 
 /**************************************************
-*¶ÁÇëÇóÔ¤´¦Àíº¯Êı£¬µ±¶ÁÇëÇóËù¶ÁµÃÒ³ÀïÃæÃ»ÓĞÊı¾İÊ±£¬
-*ĞèÒªÔ¤´¦ÀíÍø¸ÃÒ³ÀïÃæĞ´Êı¾İ£¬ÒÔ±£Ö¤ÄÜ¶Áµ½Êı¾İ
+*è¯»è¯·æ±‚é¢„å¤„ç†å‡½æ•°ï¼Œå½“è¯»è¯·æ±‚æ‰€è¯»å¾—é¡µé‡Œé¢æ²¡æœ‰æ•°æ®æ—¶ï¼Œ
+*éœ€è¦é¢„å¤„ç†ç½‘è¯¥é¡µé‡Œé¢å†™æ•°æ®ï¼Œä»¥ä¿è¯èƒ½è¯»åˆ°æ•°æ®
 ***************************************************/
 struct ssd_info *pre_process_page(struct ssd_info *ssd)
 {
@@ -180,53 +180,53 @@ struct ssd_info *pre_process_page(struct ssd_info *ssd)
 	printf("begin pre_process_page.................\n");
 
 	ssd->tracefile=fopen(ssd->tracefilename,"r");
-	if(ssd->tracefile == NULL )      /*´ò¿ªtraceÎÄ¼ş´ÓÖĞ¶ÁÈ¡ÇëÇó*/
+	if(ssd->tracefile == NULL )      /*æ‰“å¼€traceæ–‡ä»¶ä»ä¸­è¯»å–è¯·æ±‚*/
 	{
 		printf("the trace file can't open\n");
 		return NULL;
 	}
 
 	full_page=~(0xffffffff<<(ssd->parameter->subpage_page));
-	/*¼ÆËã³öÕâ¸össdµÄ×î´óÂß¼­ÉÈÇøºÅ*/
+	/*è®¡ç®—å‡ºè¿™ä¸ªssdçš„æœ€å¤§é€»è¾‘æ‰‡åŒºå·*/
 	largest_lsn=(unsigned int )((ssd->parameter->chip_num*ssd->parameter->die_chip*ssd->parameter->plane_die*ssd->parameter->block_plane*ssd->parameter->page_block*ssd->parameter->subpage_page)*(1-ssd->parameter->overprovide));
 
 	while(fgets(buffer_request,200,ssd->tracefile))
 	{
 		sscanf(buffer_request,"%lld %d %d %d %d",&time,&device,&lsn,&size,&ope);
 		fl++;
-		trace_assert(time,device,lsn,size,ope);                         /*¶ÏÑÔ£¬µ±¶Áµ½µÄtime£¬device£¬lsn£¬size£¬ope²»ºÏ·¨Ê±¾Í»á´¦Àí*/
+		trace_assert(time,device,lsn,size,ope);                         /*æ–­è¨€ï¼Œå½“è¯»åˆ°çš„timeï¼Œdeviceï¼Œlsnï¼Œsizeï¼Œopeä¸åˆæ³•æ—¶å°±ä¼šå¤„ç†*/
 
-		add_size=0;                                                     /*add_sizeÊÇÕâ¸öÇëÇóÒÑ¾­Ô¤´¦ÀíµÄ´óĞ¡*/
+		add_size=0;                                                     /*add_sizeæ˜¯è¿™ä¸ªè¯·æ±‚å·²ç»é¢„å¤„ç†çš„å¤§å°*/
 
-		if(ope==1)                                                      /*ÕâÀïÖ»ÊÇ¶ÁÇëÇóµÄÔ¤´¦Àí£¬ĞèÒªÌáÇ°½«ÏàÓ¦Î»ÖÃµÄĞÅÏ¢½øĞĞÏàÓ¦ĞŞ¸Ä*/
+		if(ope==1)                                                      /*è¿™é‡Œåªæ˜¯è¯»è¯·æ±‚çš„é¢„å¤„ç†ï¼Œéœ€è¦æå‰å°†ç›¸åº”ä½ç½®çš„ä¿¡æ¯è¿›è¡Œç›¸åº”ä¿®æ”¹*/
 		{
 			while(add_size<size)
 			{				
-				lsn=lsn%largest_lsn;                                    /*·ÀÖ¹»ñµÃµÄlsn±È×î´óµÄlsn»¹´ó*/		
+				lsn=lsn%largest_lsn;                                    /*é˜²æ­¢è·å¾—çš„lsnæ¯”æœ€å¤§çš„lsnè¿˜å¤§*/		
 				sub_size=ssd->parameter->subpage_page-(lsn%ssd->parameter->subpage_page);		
-				if(add_size+sub_size>=size)                             /*Ö»ÓĞµ±Ò»¸öÇëÇóµÄ´óĞ¡Ğ¡ÓÚÒ»¸öpageµÄ´óĞ¡Ê±»òÕßÊÇ´¦ÀíÒ»¸öÇëÇóµÄ×îºóÒ»¸öpageÊ±»á³öÏÖÕâÖÖÇé¿ö*/
+				if(add_size+sub_size>=size)                             /*åªæœ‰å½“ä¸€ä¸ªè¯·æ±‚çš„å¤§å°å°äºä¸€ä¸ªpageçš„å¤§å°æ—¶æˆ–è€…æ˜¯å¤„ç†ä¸€ä¸ªè¯·æ±‚çš„æœ€åä¸€ä¸ªpageæ—¶ä¼šå‡ºç°è¿™ç§æƒ…å†µ*/
 				{		
 					sub_size=size-add_size;		
 					add_size+=sub_size;		
 				}
 
-				if((sub_size>ssd->parameter->subpage_page)||(add_size>size))/*µ±Ô¤´¦ÀíÒ»¸ö×Ó´óĞ¡Ê±£¬Õâ¸ö´óĞ¡´óÓÚÒ»¸öpage»òÊÇÒÑ¾­´¦ÀíµÄ´óĞ¡´óÓÚsize¾Í±¨´í*/		
+				if((sub_size>ssd->parameter->subpage_page)||(add_size>size))/*å½“é¢„å¤„ç†ä¸€ä¸ªå­å¤§å°æ—¶ï¼Œè¿™ä¸ªå¤§å°å¤§äºä¸€ä¸ªpageæˆ–æ˜¯å·²ç»å¤„ç†çš„å¤§å°å¤§äºsizeå°±æŠ¥é”™*/		
 				{		
 					printf("pre_process sub_size:%d\n",sub_size);		
 				}
 
                 /*******************************************************************************************************
-				*ÀûÓÃÂß¼­ÉÈÇøºÅlsn¼ÆËã³öÂß¼­Ò³ºÅlpn
-				*ÅĞ¶ÏÕâ¸ödramÖĞÓ³Éä±ímapÖĞÔÚlpnÎ»ÖÃµÄ×´Ì¬
-				*A£¬Õâ¸ö×´Ì¬==0£¬±íÊ¾ÒÔÇ°Ã»ÓĞĞ´¹ı£¬ÏÖÔÚĞèÒªÖ±½Ó½«ub_size´óĞ¡µÄ×ÓÒ³Ğ´½øÈ¥Ğ´½øÈ¥
-				*B£¬Õâ¸ö×´Ì¬>0£¬±íÊ¾£¬ÒÔÇ°ÓĞĞ´¹ı£¬ÕâĞèÒª½øÒ»²½±È½Ï×´Ì¬£¬ÒòÎªĞÂĞ´µÄ×´Ì¬¿ÉÒÔÓëÒÔÇ°µÄ×´Ì¬ÓĞÖØµşµÄÉÈÇøµÄµØ·½
+				*åˆ©ç”¨é€»è¾‘æ‰‡åŒºå·lsnè®¡ç®—å‡ºé€»è¾‘é¡µå·lpn
+				*åˆ¤æ–­è¿™ä¸ªdramä¸­æ˜ å°„è¡¨mapä¸­åœ¨lpnä½ç½®çš„çŠ¶æ€
+				*Aï¼Œè¿™ä¸ªçŠ¶æ€==0ï¼Œè¡¨ç¤ºä»¥å‰æ²¡æœ‰å†™è¿‡ï¼Œç°åœ¨éœ€è¦ç›´æ¥å°†ub_sizeå¤§å°çš„å­é¡µå†™è¿›å»å†™è¿›å»
+				*Bï¼Œè¿™ä¸ªçŠ¶æ€>0ï¼Œè¡¨ç¤ºï¼Œä»¥å‰æœ‰å†™è¿‡ï¼Œè¿™éœ€è¦è¿›ä¸€æ­¥æ¯”è¾ƒçŠ¶æ€ï¼Œå› ä¸ºæ–°å†™çš„çŠ¶æ€å¯ä»¥ä¸ä»¥å‰çš„çŠ¶æ€æœ‰é‡å çš„æ‰‡åŒºçš„åœ°æ–¹
 				********************************************************************************************************/
 				lpn=lsn/ssd->parameter->subpage_page;
-				if(ssd->dram->map->map_entry[lpn].state==0)                 /*×´Ì¬Îª0µÄÇé¿ö*/
+				if(ssd->dram->map->map_entry[lpn].state==0)                 /*çŠ¶æ€ä¸º0çš„æƒ…å†µ*/
 				{
 					/**************************************************************
-					*»ñµÃÀûÓÃget_ppn_for_pre_processº¯Êı»ñµÃppn£¬ÔÙµÃµ½location
-					*ĞŞ¸ÄssdµÄÏà¹Ø²ÎÊı£¬dramµÄÓ³Éä±ímap£¬ÒÔ¼°locationÏÂµÄpageµÄ×´Ì¬
+					*è·å¾—åˆ©ç”¨get_ppn_for_pre_processå‡½æ•°è·å¾—ppnï¼Œå†å¾—åˆ°location
+					*ä¿®æ”¹ssdçš„ç›¸å…³å‚æ•°ï¼Œdramçš„æ˜ å°„è¡¨mapï¼Œä»¥åŠlocationä¸‹çš„pageçš„çŠ¶æ€
 					***************************************************************/
 					ppn=get_ppn_for_pre_process(ssd,lsn);                  
 					location=find_location(ssd,ppn);
@@ -242,9 +242,9 @@ struct ssd_info *pre_process_page(struct ssd_info *ssd)
 					free(location);
 					location=NULL;
 				}//if(ssd->dram->map->map_entry[lpn].state==0)
-				else if(ssd->dram->map->map_entry[lpn].state>0)           /*×´Ì¬²»Îª0µÄÇé¿ö*/
+				else if(ssd->dram->map->map_entry[lpn].state>0)           /*çŠ¶æ€ä¸ä¸º0çš„æƒ…å†µ*/
 				{
-					map_entry_new=set_entry_state(ssd,lsn,sub_size);      /*µÃµ½ĞÂµÄ×´Ì¬£¬²¢ÓëÔ­À´µÄ×´Ì¬Ïà»òµÄµ½Ò»¸ö×´Ì¬*/
+					map_entry_new=set_entry_state(ssd,lsn,sub_size);      /*å¾—åˆ°æ–°çš„çŠ¶æ€ï¼Œå¹¶ä¸åŸæ¥çš„çŠ¶æ€ç›¸æˆ–çš„åˆ°ä¸€ä¸ªçŠ¶æ€*/
 					map_entry_old=ssd->dram->map->map_entry[lpn].state;
                     modify=map_entry_new|map_entry_old;
 					ppn=ssd->dram->map->map_entry[lpn].pn;
@@ -260,8 +260,8 @@ struct ssd_info *pre_process_page(struct ssd_info *ssd)
 					free(location);
 					location=NULL;
 				}//else if(ssd->dram->map->map_entry[lpn].state>0)
-				lsn=lsn+sub_size;                                         /*ÏÂ¸ö×ÓÇëÇóµÄÆğÊ¼Î»ÖÃ*/
-				add_size+=sub_size;                                       /*ÒÑ¾­´¦ÀíÁËµÄadd_size´óĞ¡±ä»¯*/
+				lsn=lsn+sub_size;                                         /*ä¸‹ä¸ªå­è¯·æ±‚çš„èµ·å§‹ä½ç½®*/
+				add_size+=sub_size;                                       /*å·²ç»å¤„ç†äº†çš„add_sizeå¤§å°å˜åŒ–*/
 			}//while(add_size<size)
 		}//if(ope==1) 
 	}	
@@ -283,8 +283,8 @@ struct ssd_info *pre_process_page(struct ssd_info *ssd)
 }
 
 /**************************************
-*º¯Êı¹¦ÄÜÊÇÎªÔ¤´¦Àíº¯Êı»ñÈ¡ÎïÀíÒ³ºÅppn
-*»ñÈ¡Ò³ºÅ·ÖÎª¶¯Ì¬»ñÈ¡ºÍ¾²Ì¬»ñÈ¡
+*å‡½æ•°åŠŸèƒ½æ˜¯ä¸ºé¢„å¤„ç†å‡½æ•°è·å–ç‰©ç†é¡µå·ppn
+*è·å–é¡µå·åˆ†ä¸ºåŠ¨æ€è·å–å’Œé™æ€è·å–
 **************************************/
 unsigned int get_ppn_for_pre_process(struct ssd_info *ssd,unsigned int lsn)     
 {
@@ -303,9 +303,9 @@ unsigned int get_ppn_for_pre_process(struct ssd_info *ssd,unsigned int lsn)
 	plane_num=ssd->parameter->plane_die;
 	lpn=lsn/ssd->parameter->subpage_page;
 
-	if (ssd->parameter->allocation_scheme==0)                           /*¶¯Ì¬·½Ê½ÏÂ»ñÈ¡ppn*/
+	if (ssd->parameter->allocation_scheme==0)                           /*åŠ¨æ€æ–¹å¼ä¸‹è·å–ppn*/
 	{
-		if (ssd->parameter->dynamic_allocation==0)                      /*±íÊ¾È«¶¯Ì¬·½Ê½ÏÂ£¬Ò²¾ÍÊÇchannel£¬chip£¬die£¬plane£¬blockµÈ¶¼ÊÇ¶¯Ì¬·ÖÅä*/
+		if (ssd->parameter->dynamic_allocation==0)                      /*è¡¨ç¤ºå…¨åŠ¨æ€æ–¹å¼ä¸‹ï¼Œä¹Ÿå°±æ˜¯channelï¼Œchipï¼Œdieï¼Œplaneï¼Œblockç­‰éƒ½æ˜¯åŠ¨æ€åˆ†é…*/
 		{
 			channel=ssd->token;
 			ssd->token=(ssd->token+1)%ssd->parameter->channel_number;
@@ -316,7 +316,7 @@ unsigned int get_ppn_for_pre_process(struct ssd_info *ssd,unsigned int lsn)
 			plane=ssd->channel_head[channel].chip_head[chip].die_head[die].token;
 			ssd->channel_head[channel].chip_head[chip].die_head[die].token=(plane+1)%ssd->parameter->plane_die;
 		} 
-		else if (ssd->parameter->dynamic_allocation==1)                 /*±íÊ¾°ë¶¯Ì¬·½Ê½£¬channel¾²Ì¬¸ø³ö£¬package£¬die£¬plane¶¯Ì¬·ÖÅä*/                 
+		else if (ssd->parameter->dynamic_allocation==1)                 /*è¡¨ç¤ºåŠåŠ¨æ€æ–¹å¼ï¼Œchannelé™æ€ç»™å‡ºï¼Œpackageï¼Œdieï¼ŒplaneåŠ¨æ€åˆ†é…*/                 
 		{
 			channel=lpn%ssd->parameter->channel_number;
 			chip=ssd->channel_head[channel].token;
@@ -327,7 +327,7 @@ unsigned int get_ppn_for_pre_process(struct ssd_info *ssd,unsigned int lsn)
 			ssd->channel_head[channel].chip_head[chip].die_head[die].token=(plane+1)%ssd->parameter->plane_die;
 		}
 	} 
-	else if (ssd->parameter->allocation_scheme==1)                       /*±íÊ¾¾²Ì¬·ÖÅä£¬Í¬Ê±Ò²ÓĞ0,1,2,3,4,5Õâ6ÖĞ²»Í¬¾²Ì¬·ÖÅä·½Ê½*/
+	else if (ssd->parameter->allocation_scheme==1)                       /*è¡¨ç¤ºé™æ€åˆ†é…ï¼ŒåŒæ—¶ä¹Ÿæœ‰0,1,2,3,4,5è¿™6ä¸­ä¸åŒé™æ€åˆ†é…æ–¹å¼*/
 	{
 		switch (ssd->parameter->static_allocation)
 		{
@@ -388,8 +388,8 @@ unsigned int get_ppn_for_pre_process(struct ssd_info *ssd,unsigned int lsn)
 	}
     
 	/******************************************************************************
-	*¸ù¾İÉÏÊö·ÖÅä·½·¨ÕÒµ½channel£¬chip£¬die£¬planeºó£¬ÔÙÔÚÕâ¸öÀïÃæÕÒµ½active_block
-	*½Ó×Å»ñµÃppn
+	*æ ¹æ®ä¸Šè¿°åˆ†é…æ–¹æ³•æ‰¾åˆ°channelï¼Œchipï¼Œdieï¼Œplaneåï¼Œå†åœ¨è¿™ä¸ªé‡Œé¢æ‰¾åˆ°active_block
+	*æ¥ç€è·å¾—ppn
 	******************************************************************************/
 	if(find_active_block(ssd,channel,chip,die,plane)==FAILURE)
 	{
@@ -407,8 +407,8 @@ unsigned int get_ppn_for_pre_process(struct ssd_info *ssd,unsigned int lsn)
 
 
 /***************************************************************************************************
-*º¯Êı¹¦ÄÜÊÇÔÚËù¸øµÄchannel£¬chip£¬die£¬planeÀïÃæÕÒµ½Ò»¸öactive_blockÈ»ºóÔÙÔÚÕâ¸öblockÀïÃæÕÒµ½Ò»¸öÒ³£¬
-*ÔÙÀûÓÃfind_ppnÕÒµ½ppn¡£
+*å‡½æ•°åŠŸèƒ½æ˜¯åœ¨æ‰€ç»™çš„channelï¼Œchipï¼Œdieï¼Œplaneé‡Œé¢æ‰¾åˆ°ä¸€ä¸ªactive_blockç„¶åå†åœ¨è¿™ä¸ªblocké‡Œé¢æ‰¾åˆ°ä¸€ä¸ªé¡µï¼Œ
+*å†åˆ©ç”¨find_ppnæ‰¾åˆ°ppnã€‚
 ****************************************************************************************************/
 struct ssd_info *get_ppn(struct ssd_info *ssd,unsigned int channel,unsigned int chip,unsigned int die,unsigned int plane,struct sub_request *sub)
 {
@@ -432,8 +432,8 @@ struct ssd_info *get_ppn(struct ssd_info *ssd,unsigned int channel,unsigned int 
 	lpn=sub->lpn;
     
 	/*************************************************************************************
-	*ÀûÓÃº¯Êıfind_active_blockÔÚchannel£¬chip£¬die£¬planeÕÒµ½»îÔ¾block
-	*²¢ÇÒĞŞ¸ÄÕâ¸öchannel£¬chip£¬die£¬plane£¬active_blockÏÂµÄlast_write_pageºÍfree_page_num
+	*åˆ©ç”¨å‡½æ•°find_active_blockåœ¨channelï¼Œchipï¼Œdieï¼Œplaneæ‰¾åˆ°æ´»è·ƒblock
+	*å¹¶ä¸”ä¿®æ”¹è¿™ä¸ªchannelï¼Œchipï¼Œdieï¼Œplaneï¼Œactive_blockä¸‹çš„last_write_pageå’Œfree_page_num
 	**************************************************************************************/
 	if(find_active_block(ssd,channel,chip,die,plane)==FAILURE)                      
 	{
@@ -463,7 +463,7 @@ struct ssd_info *get_ppn(struct ssd_info *ssd,unsigned int channel,unsigned int 
 		ssd->dram->map->map_entry[lpn].pn=find_ppn(ssd,channel,chip,die,plane,block,page);
 		ssd->dram->map->map_entry[lpn].state=sub->state;
 	}
-	else                                                                            /*Õâ¸öÂß¼­Ò³½øĞĞÁË¸üĞÂ£¬ĞèÒª½«Ô­À´µÄÒ³ÖÃÎªÊ§Ğ§*/
+	else                                                                            /*è¿™ä¸ªé€»è¾‘é¡µè¿›è¡Œäº†æ›´æ–°ï¼Œéœ€è¦å°†åŸæ¥çš„é¡µç½®ä¸ºå¤±æ•ˆ*/
 	{
 		ppn=ssd->dram->map->map_entry[lpn].pn;
 		location=find_location(ssd,ppn);
@@ -472,13 +472,13 @@ struct ssd_info *get_ppn(struct ssd_info *ssd,unsigned int channel,unsigned int 
 			printf("\nError in get_ppn()\n");
 		}
 
-		ssd->channel_head[location->channel].chip_head[location->chip].die_head[location->die].plane_head[location->plane].blk_head[location->block].page_head[location->page].valid_state=0;             /*±íÊ¾Ä³Ò»Ò³Ê§Ğ§£¬Í¬Ê±±ê¼ÇvalidºÍfree×´Ì¬¶¼Îª0*/
-		ssd->channel_head[location->channel].chip_head[location->chip].die_head[location->die].plane_head[location->plane].blk_head[location->block].page_head[location->page].free_state=0;              /*±íÊ¾Ä³Ò»Ò³Ê§Ğ§£¬Í¬Ê±±ê¼ÇvalidºÍfree×´Ì¬¶¼Îª0*/
+		ssd->channel_head[location->channel].chip_head[location->chip].die_head[location->die].plane_head[location->plane].blk_head[location->block].page_head[location->page].valid_state=0;             /*è¡¨ç¤ºæŸä¸€é¡µå¤±æ•ˆï¼ŒåŒæ—¶æ ‡è®°validå’ŒfreeçŠ¶æ€éƒ½ä¸º0*/
+		ssd->channel_head[location->channel].chip_head[location->chip].die_head[location->die].plane_head[location->plane].blk_head[location->block].page_head[location->page].free_state=0;              /*è¡¨ç¤ºæŸä¸€é¡µå¤±æ•ˆï¼ŒåŒæ—¶æ ‡è®°validå’ŒfreeçŠ¶æ€éƒ½ä¸º0*/
 		ssd->channel_head[location->channel].chip_head[location->chip].die_head[location->die].plane_head[location->plane].blk_head[location->block].page_head[location->page].lpn=0;
 		ssd->channel_head[location->channel].chip_head[location->chip].die_head[location->die].plane_head[location->plane].blk_head[location->block].invalid_page_num++;
 		
 		/*******************************************************************************************
-		*¸ÃblockÖĞÈ«ÊÇinvalidµÄÒ³£¬¿ÉÒÔÖ±½ÓÉ¾³ı£¬¾ÍÔÚ´´½¨Ò»¸ö¿É²Á³ıµÄ½Úµã£¬¹ÒÔÚlocationÏÂµÄplaneÏÂÃæ
+		*è¯¥blockä¸­å…¨æ˜¯invalidçš„é¡µï¼Œå¯ä»¥ç›´æ¥åˆ é™¤ï¼Œå°±åœ¨åˆ›å»ºä¸€ä¸ªå¯æ“¦é™¤çš„èŠ‚ç‚¹ï¼ŒæŒ‚åœ¨locationä¸‹çš„planeä¸‹é¢
 		********************************************************************************************/
 		if (ssd->channel_head[location->channel].chip_head[location->chip].die_head[location->die].plane_head[location->plane].blk_head[location->block].invalid_page_num==ssd->parameter->page_block)    
 		{
@@ -507,7 +507,7 @@ struct ssd_info *get_ppn(struct ssd_info *ssd,unsigned int channel,unsigned int 
 	}
 
 	
-	sub->ppn=ssd->dram->map->map_entry[lpn].pn;                                      /*ĞŞ¸Äsub×ÓÇëÇóµÄppn£¬locationµÈ±äÁ¿*/
+	sub->ppn=ssd->dram->map->map_entry[lpn].pn;                                      /*ä¿®æ”¹subå­è¯·æ±‚çš„ppnï¼Œlocationç­‰å˜é‡*/
 	sub->location->channel=channel;
 	sub->location->chip=chip;
 	sub->location->die=die;
@@ -515,7 +515,7 @@ struct ssd_info *get_ppn(struct ssd_info *ssd,unsigned int channel,unsigned int 
 	sub->location->block=active_block;
 	sub->location->page=page;
 
-	ssd->program_count++;                                                           /*ĞŞ¸ÄssdµÄprogram_count,free_pageµÈ±äÁ¿*/
+	ssd->program_count++;                                                           /*ä¿®æ”¹ssdçš„program_count,free_pageç­‰å˜é‡*/
 	ssd->channel_head[channel].program_count++;
 	ssd->channel_head[channel].chip_head[chip].program_count++;
 	ssd->channel_head[channel].chip_head[chip].die_head[die].plane_head[plane].free_page--;
@@ -525,8 +525,8 @@ struct ssd_info *get_ppn(struct ssd_info *ssd,unsigned int channel,unsigned int 
 	ssd->channel_head[channel].chip_head[chip].die_head[die].plane_head[plane].blk_head[active_block].page_head[page].written_count++;
 	ssd->write_flash_count++;
 
-	if (ssd->parameter->active_write==0)                                            /*Èç¹ûÃ»ÓĞÖ÷¶¯²ßÂÔ£¬Ö»²ÉÓÃgc_hard_threshold£¬²¢ÇÒÎŞ·¨ÖĞ¶ÏGC¹ı³Ì*/
-	{                                                                               /*Èç¹ûplaneÖĞµÄfree_pageµÄÊıÄ¿ÉÙÓÚgc_hard_thresholdËùÉè¶¨µÄãĞÖµ¾Í²úÉúgc²Ù×÷*/
+	if (ssd->parameter->active_write==0)                                            /*å¦‚æœæ²¡æœ‰ä¸»åŠ¨ç­–ç•¥ï¼Œåªé‡‡ç”¨gc_hard_thresholdï¼Œå¹¶ä¸”æ— æ³•ä¸­æ–­GCè¿‡ç¨‹*/
+	{                                                                               /*å¦‚æœplaneä¸­çš„free_pageçš„æ•°ç›®å°‘äºgc_hard_thresholdæ‰€è®¾å®šçš„é˜ˆå€¼å°±äº§ç”Ÿgcæ“ä½œ*/
 		if (ssd->channel_head[channel].chip_head[chip].die_head[die].plane_head[plane].free_page<(ssd->parameter->page_block*ssd->parameter->block_plane*ssd->parameter->gc_hard_threshold))
 		{
 			gc_node=(struct gc_operation *)malloc(sizeof(struct gc_operation));
@@ -550,8 +550,8 @@ struct ssd_info *get_ppn(struct ssd_info *ssd,unsigned int channel,unsigned int 
 	return ssd;
 }
 /*****************************************************************************************
-*Õâ¸öº¯Êı¹¦ÄÜÊÇÎªgc²Ù×÷Ñ°ÕÒĞÂµÄppn£¬ÒòÎªÔÚgc²Ù×÷ÖĞĞèÒªÕÒµ½ĞÂµÄÎïÀí¿é´æ·ÅÔ­À´ÎïÀí¿éÉÏµÄÊı¾İ
-*ÔÚgcÖĞÑ°ÕÒĞÂÎïÀí¿éµÄº¯Êı£¬²»»áÒıÆğÑ­»·µÄgc²Ù×÷
+*è¿™ä¸ªå‡½æ•°åŠŸèƒ½æ˜¯ä¸ºgcæ“ä½œå¯»æ‰¾æ–°çš„ppnï¼Œå› ä¸ºåœ¨gcæ“ä½œä¸­éœ€è¦æ‰¾åˆ°æ–°çš„ç‰©ç†å—å­˜æ”¾åŸæ¥ç‰©ç†å—ä¸Šçš„æ•°æ®
+*åœ¨gcä¸­å¯»æ‰¾æ–°ç‰©ç†å—çš„å‡½æ•°ï¼Œä¸ä¼šå¼•èµ·å¾ªç¯çš„gcæ“ä½œ
 ******************************************************************************************/
  unsigned int get_ppn_for_gc(struct ssd_info *ssd,unsigned int channel,unsigned int chip,unsigned int die,unsigned int plane)     
 {
@@ -596,10 +596,10 @@ struct ssd_info *get_ppn(struct ssd_info *ssd,unsigned int channel,unsigned int 
 }
 
 /*********************************************************************************************************************
-* ÖìÖ¾Ã÷ ÓÚ2011Äê7ÔÂ28ÈÕĞŞ¸Ä   
-*º¯ÊıµÄ¹¦ÄÜ¾ÍÊÇerase_operation²Á³ı²Ù×÷£¬°Ñchannel£¬chip£¬die£¬planeÏÂµÄblock²Á³ıµô
-*Ò²¾ÍÊÇ³õÊ¼»¯Õâ¸öblockµÄÏà¹Ø²ÎÊı£¬eg£ºfree_page_num=page_block£¬invalid_page_num=0£¬last_write_page=-1£¬erase_count++
-*»¹ÓĞÕâ¸öblockÏÂÃæµÄÃ¿¸öpageµÄÏà¹Ø²ÎÊıÒ²ÒªĞŞ¸Ä¡£
+* æœ±å¿—æ˜ äº2011å¹´7æœˆ28æ—¥ä¿®æ”¹   
+*å‡½æ•°çš„åŠŸèƒ½å°±æ˜¯erase_operationæ“¦é™¤æ“ä½œï¼ŒæŠŠchannelï¼Œchipï¼Œdieï¼Œplaneä¸‹çš„blockæ“¦é™¤æ‰
+*ä¹Ÿå°±æ˜¯åˆå§‹åŒ–è¿™ä¸ªblockçš„ç›¸å…³å‚æ•°ï¼Œegï¼šfree_page_num=page_blockï¼Œinvalid_page_num=0ï¼Œlast_write_page=-1ï¼Œerase_count++
+*è¿˜æœ‰è¿™ä¸ªblockä¸‹é¢çš„æ¯ä¸ªpageçš„ç›¸å…³å‚æ•°ä¹Ÿè¦ä¿®æ”¹ã€‚
 *********************************************************************************************************************/
 
 Status erase_operation(struct ssd_info * ssd,unsigned int channel ,unsigned int chip ,unsigned int die ,unsigned int plane ,unsigned int block)
@@ -626,7 +626,7 @@ Status erase_operation(struct ssd_info * ssd,unsigned int channel ,unsigned int 
 
 
 /**************************************************************************************
-*Õâ¸öº¯ÊıµÄ¹¦ÄÜÊÇ´¦ÀíINTERLEAVE_TWO_PLANE£¬INTERLEAVE£¬TWO_PLANE£¬NORMALÏÂµÄ²Á³ıµÄ²Ù×÷¡£
+*è¿™ä¸ªå‡½æ•°çš„åŠŸèƒ½æ˜¯å¤„ç†INTERLEAVE_TWO_PLANEï¼ŒINTERLEAVEï¼ŒTWO_PLANEï¼ŒNORMALä¸‹çš„æ“¦é™¤çš„æ“ä½œã€‚
 ***************************************************************************************/
 Status erase_planes(struct ssd_info * ssd, unsigned int channel, unsigned int chip, unsigned int die1, unsigned int plane1,unsigned int command)
 {
@@ -638,14 +638,14 @@ Status erase_planes(struct ssd_info * ssd, unsigned int channel, unsigned int ch
 	unsigned int block1=0;
 
 	if((ssd->channel_head[channel].chip_head[chip].die_head[die1].plane_head[plane1].erase_node==NULL)||               
-		((command!=INTERLEAVE_TWO_PLANE)&&(command!=INTERLEAVE)&&(command!=TWO_PLANE)&&(command!=NORMAL)))     /*Èç¹ûÃ»ÓĞ²Á³ı²Ù×÷£¬»òÕßcommand²»¶Ô£¬·µ»Ø´íÎó*/           
+		((command!=INTERLEAVE_TWO_PLANE)&&(command!=INTERLEAVE)&&(command!=TWO_PLANE)&&(command!=NORMAL)))     /*å¦‚æœæ²¡æœ‰æ“¦é™¤æ“ä½œï¼Œæˆ–è€…commandä¸å¯¹ï¼Œè¿”å›é”™è¯¯*/           
 	{
 		return ERROR;
 	}
 
 	/************************************************************************************************************
-	*´¦Àí²Á³ı²Ù×÷Ê±£¬Ê×ÏÈÒª´«ËÍ²Á³ıÃüÁî£¬ÕâÊÇchannel£¬chip´¦ÓÚ´«ËÍÃüÁîµÄ×´Ì¬£¬¼´CHANNEL_TRANSFER£¬CHIP_ERASE_BUSY
-	*ÏÂÒ»×´Ì¬ÊÇCHANNEL_IDLE£¬CHIP_IDLE¡£
+	*å¤„ç†æ“¦é™¤æ“ä½œæ—¶ï¼Œé¦–å…ˆè¦ä¼ é€æ“¦é™¤å‘½ä»¤ï¼Œè¿™æ˜¯channelï¼Œchipå¤„äºä¼ é€å‘½ä»¤çš„çŠ¶æ€ï¼Œå³CHANNEL_TRANSFERï¼ŒCHIP_ERASE_BUSY
+	*ä¸‹ä¸€çŠ¶æ€æ˜¯CHANNEL_IDLEï¼ŒCHIP_IDLEã€‚
 	*************************************************************************************************************/
 	block1=ssd->channel_head[channel].chip_head[chip].die_head[die1].plane_head[plane1].erase_node->block;
 	
@@ -657,7 +657,7 @@ Status erase_planes(struct ssd_info * ssd, unsigned int channel, unsigned int ch
 	ssd->channel_head[channel].chip_head[chip].current_time=ssd->current_time;									
 	ssd->channel_head[channel].chip_head[chip].next_state=CHIP_IDLE;
 
-	if(command==INTERLEAVE_TWO_PLANE)                                       /*¸ß¼¶ÃüÁîINTERLEAVE_TWO_PLANEµÄ´¦Àí*/
+	if(command==INTERLEAVE_TWO_PLANE)                                       /*é«˜çº§å‘½ä»¤INTERLEAVE_TWO_PLANEçš„å¤„ç†*/
 	{
 		for(die=0;die<ssd->parameter->die_chip;die++)
 		{
@@ -687,7 +687,7 @@ Status erase_planes(struct ssd_info * ssd, unsigned int channel, unsigned int ch
 
 					}
 					ssd->channel_head[channel].chip_head[chip].die_head[die].plane_head[plane].erase_node=direct_erase_node->next_node;
-					erase_operation(ssd,channel,chip,die,plane,block);     /*ÕæÊµµÄ²Á³ı²Ù×÷µÄ´¦Àí*/
+					erase_operation(ssd,channel,chip,die,plane,block);     /*çœŸå®çš„æ“¦é™¤æ“ä½œçš„å¤„ç†*/
 					free(direct_erase_node);                               
 					direct_erase_node=NULL;
 					ssd->direct_erase_count++;
@@ -696,12 +696,12 @@ Status erase_planes(struct ssd_info * ssd, unsigned int channel, unsigned int ch
 			}
 		}
 
-		ssd->interleave_mplane_erase_count++;                             /*·¢ËÍÁËÒ»¸öinterleave two plane eraseÃüÁî,²¢¼ÆËãÕâ¸ö´¦ÀíµÄÊ±¼ä£¬ÒÔ¼°ÏÂÒ»¸ö×´Ì¬µÄÊ±¼ä*/
+		ssd->interleave_mplane_erase_count++;                             /*å‘é€äº†ä¸€ä¸ªinterleave two plane eraseå‘½ä»¤,å¹¶è®¡ç®—è¿™ä¸ªå¤„ç†çš„æ—¶é—´ï¼Œä»¥åŠä¸‹ä¸€ä¸ªçŠ¶æ€çš„æ—¶é—´*/
 		ssd->channel_head[channel].next_state_predict_time=ssd->current_time+18*ssd->parameter->time_characteristics.tWC+ssd->parameter->time_characteristics.tWB;       
 		ssd->channel_head[channel].chip_head[chip].next_state_predict_time=ssd->channel_head[channel].next_state_predict_time-9*ssd->parameter->time_characteristics.tWC+ssd->parameter->time_characteristics.tBERS;
 
 	}
-	else if(command==INTERLEAVE)                                          /*¸ß¼¶ÃüÁîINTERLEAVEµÄ´¦Àí*/
+	else if(command==INTERLEAVE)                                          /*é«˜çº§å‘½ä»¤INTERLEAVEçš„å¤„ç†*/
 	{
 		for(die=0;die<ssd->parameter->die_chip;die++)
 		{
@@ -728,7 +728,7 @@ Status erase_planes(struct ssd_info * ssd, unsigned int channel, unsigned int ch
 		ssd->channel_head[channel].next_state_predict_time=ssd->current_time+14*ssd->parameter->time_characteristics.tWC;       
 		ssd->channel_head[channel].chip_head[chip].next_state_predict_time=ssd->channel_head[channel].next_state_predict_time+ssd->parameter->time_characteristics.tBERS;
 	}
-	else if(command==TWO_PLANE)                                          /*¸ß¼¶ÃüÁîTWO_PLANEµÄ´¦Àí*/
+	else if(command==TWO_PLANE)                                          /*é«˜çº§å‘½ä»¤TWO_PLANEçš„å¤„ç†*/
 	{
 
 		for(plane=0;plane<ssd->parameter->plane_die;plane++)
@@ -752,7 +752,7 @@ Status erase_planes(struct ssd_info * ssd, unsigned int channel, unsigned int ch
 		ssd->channel_head[channel].next_state_predict_time=ssd->current_time+14*ssd->parameter->time_characteristics.tWC;      
 		ssd->channel_head[channel].chip_head[chip].next_state_predict_time=ssd->channel_head[channel].next_state_predict_time+ssd->parameter->time_characteristics.tBERS;
 	}
-	else if(command==NORMAL)                                             /*ÆÕÍ¨ÃüÁîNORMALµÄ´¦Àí*/
+	else if(command==NORMAL)                                             /*æ™®é€šå‘½ä»¤NORMALçš„å¤„ç†*/
 	{
 		direct_erase_node=ssd->channel_head[channel].chip_head[chip].die_head[die1].plane_head[plane1].erase_node;
 		block=direct_erase_node->block;
@@ -784,19 +784,19 @@ Status erase_planes(struct ssd_info * ssd, unsigned int channel, unsigned int ch
 
 
 /*******************************************************************************************************************
-*GC²Ù×÷ÓÉÄ³¸öplaneµÄfree¿éÉÙÓÚãĞÖµ½øĞĞ´¥·¢£¬µ±Ä³¸öplane±»´¥·¢Ê±£¬GC²Ù×÷Õ¼¾İÕâ¸öplaneËùÔÚµÄdie£¬ÒòÎªdieÊÇÒ»¸ö¶ÀÁ¢µ¥Ôª¡£
-*¶ÔÒ»¸ödieµÄGC²Ù×÷£¬¾¡Á¿×öµ½ËÄ¸öplaneÍ¬Ê±erase£¬ÀûÓÃinterleave erase²Ù×÷¡£GC²Ù×÷Ó¦¸Ã×öµ½¿ÉÒÔËæÊ±Í£Ö¹£¨ÒÆ¶¯Êı¾İºÍ²Á³ı
-*Ê±²»ĞĞ£¬µ«ÊÇ¼äÏ¶Ê±¼ä¿ÉÒÔÍ£Ö¹GC²Ù×÷£©£¬ÒÔ·şÎñĞÂµ½´ïµÄÇëÇó£¬µ±ÇëÇó·şÎñÍêºó£¬ÀûÓÃÇëÇó¼äÏ¶Ê±¼ä£¬¼ÌĞøGC²Ù×÷¡£¿ÉÒÔÉèÖÃÁ½¸ö
-*GCãĞÖµ£¬Ò»¸öÈíãĞÖµ£¬Ò»¸öÓ²ãĞÖµ¡£ÈíãĞÖµ±íÊ¾µ½´ï¸ÃãĞÖµºó£¬¿ÉÒÔ¿ªÊ¼Ö÷¶¯µÄGC²Ù×÷£¬ÀûÓÃ¼äĞªÊ±¼ä£¬GC¿ÉÒÔ±»ĞÂµ½µÄÇëÇóÖĞ¶Ï£»
-*µ±µ½´ïÓ²ãĞÖµºó£¬Ç¿ÖÆĞÔÖ´ĞĞGC²Ù×÷£¬ÇÒ´ËGC²Ù×÷²»ÄÜ±»ÖĞ¶Ï£¬Ö±µ½»Øµ½Ó²ãĞÖµÒÔÉÏ¡£
-*ÔÚÕâ¸öº¯ÊıÀïÃæ£¬ÕÒ³öÕâ¸ödieËùÓĞµÄplaneÖĞ£¬ÓĞÃ»ÓĞ¿ÉÒÔÖ±½ÓÉ¾³ıµÄblock£¬ÒªÊÇÓĞµÄ»°£¬ÀûÓÃinterleave two planeÃüÁî£¬É¾³ı
-*ÕâĞ©block£¬·ñÔòÓĞ¶àÉÙplaneÓĞÕâÖÖÖ±½ÓÉ¾³ıµÄblock¾ÍÍ¬Ê±É¾³ı£¬²»ĞĞµÄ»°£¬×î²î¾ÍÊÇµ¥¶ÀÕâ¸öplane½øĞĞÉ¾³ı£¬Á¬ÕâÒ²²»Âú×ãµÄ»°£¬
-*Ö±½ÓÌø³ö£¬µ½gc_parallelismº¯Êı½øĞĞ½øÒ»²½GC²Ù×÷¡£¸Ãº¯ÊıÑ°ÕÒÈ«²¿ÎªinvalidµÄ¿é£¬Ö±½ÓÉ¾³ı£¬ÕÒµ½¿ÉÖ±½ÓÉ¾³ıµÄ·µ»Ø1£¬Ã»ÓĞÕÒ
-*µ½·µ»Ø-1¡£
+*GCæ“ä½œç”±æŸä¸ªplaneçš„freeå—å°‘äºé˜ˆå€¼è¿›è¡Œè§¦å‘ï¼Œå½“æŸä¸ªplaneè¢«è§¦å‘æ—¶ï¼ŒGCæ“ä½œå æ®è¿™ä¸ªplaneæ‰€åœ¨çš„dieï¼Œå› ä¸ºdieæ˜¯ä¸€ä¸ªç‹¬ç«‹å•å…ƒã€‚
+*å¯¹ä¸€ä¸ªdieçš„GCæ“ä½œï¼Œå°½é‡åšåˆ°å››ä¸ªplaneåŒæ—¶eraseï¼Œåˆ©ç”¨interleave eraseæ“ä½œã€‚GCæ“ä½œåº”è¯¥åšåˆ°å¯ä»¥éšæ—¶åœæ­¢ï¼ˆç§»åŠ¨æ•°æ®å’Œæ“¦é™¤
+*æ—¶ä¸è¡Œï¼Œä½†æ˜¯é—´éš™æ—¶é—´å¯ä»¥åœæ­¢GCæ“ä½œï¼‰ï¼Œä»¥æœåŠ¡æ–°åˆ°è¾¾çš„è¯·æ±‚ï¼Œå½“è¯·æ±‚æœåŠ¡å®Œåï¼Œåˆ©ç”¨è¯·æ±‚é—´éš™æ—¶é—´ï¼Œç»§ç»­GCæ“ä½œã€‚å¯ä»¥è®¾ç½®ä¸¤ä¸ª
+*GCé˜ˆå€¼ï¼Œä¸€ä¸ªè½¯é˜ˆå€¼ï¼Œä¸€ä¸ªç¡¬é˜ˆå€¼ã€‚è½¯é˜ˆå€¼è¡¨ç¤ºåˆ°è¾¾è¯¥é˜ˆå€¼åï¼Œå¯ä»¥å¼€å§‹ä¸»åŠ¨çš„GCæ“ä½œï¼Œåˆ©ç”¨é—´æ­‡æ—¶é—´ï¼ŒGCå¯ä»¥è¢«æ–°åˆ°çš„è¯·æ±‚ä¸­æ–­ï¼›
+*å½“åˆ°è¾¾ç¡¬é˜ˆå€¼åï¼Œå¼ºåˆ¶æ€§æ‰§è¡ŒGCæ“ä½œï¼Œä¸”æ­¤GCæ“ä½œä¸èƒ½è¢«ä¸­æ–­ï¼Œç›´åˆ°å›åˆ°ç¡¬é˜ˆå€¼ä»¥ä¸Šã€‚
+*åœ¨è¿™ä¸ªå‡½æ•°é‡Œé¢ï¼Œæ‰¾å‡ºè¿™ä¸ªdieæ‰€æœ‰çš„planeä¸­ï¼Œæœ‰æ²¡æœ‰å¯ä»¥ç›´æ¥åˆ é™¤çš„blockï¼Œè¦æ˜¯æœ‰çš„è¯ï¼Œåˆ©ç”¨interleave two planeå‘½ä»¤ï¼Œåˆ é™¤
+*è¿™äº›blockï¼Œå¦åˆ™æœ‰å¤šå°‘planeæœ‰è¿™ç§ç›´æ¥åˆ é™¤çš„blockå°±åŒæ—¶åˆ é™¤ï¼Œä¸è¡Œçš„è¯ï¼Œæœ€å·®å°±æ˜¯å•ç‹¬è¿™ä¸ªplaneè¿›è¡Œåˆ é™¤ï¼Œè¿è¿™ä¹Ÿä¸æ»¡è¶³çš„è¯ï¼Œ
+*ç›´æ¥è·³å‡ºï¼Œåˆ°gc_parallelismå‡½æ•°è¿›è¡Œè¿›ä¸€æ­¥GCæ“ä½œã€‚è¯¥å‡½æ•°å¯»æ‰¾å…¨éƒ¨ä¸ºinvalidçš„å—ï¼Œç›´æ¥åˆ é™¤ï¼Œæ‰¾åˆ°å¯ç›´æ¥åˆ é™¤çš„è¿”å›1ï¼Œæ²¡æœ‰æ‰¾
+*åˆ°è¿”å›-1ã€‚
 *********************************************************************************************************************/
 int gc_direct_erase(struct ssd_info *ssd,unsigned int channel,unsigned int chip,unsigned int die,unsigned int plane)     
 {
-	unsigned int lv_die=0,lv_plane=0;                                                           /*Îª±ÜÃâÖØÃû¶øÊ¹ÓÃµÄ¾Ö²¿±äÁ¿ Local variables*/
+	unsigned int lv_die=0,lv_plane=0;                                                           /*ä¸ºé¿å…é‡åè€Œä½¿ç”¨çš„å±€éƒ¨å˜é‡ Local variables*/
 	unsigned int interleaver_flag=FALSE,muilt_plane_flag=FALSE;
 	unsigned int normal_erase_flag=TRUE;
 
@@ -810,8 +810,8 @@ int gc_direct_erase(struct ssd_info *ssd,unsigned int channel,unsigned int chip,
 	}
     
 	/********************************************************************************************************
-	*µ±ÄÜ´¦ÀíTWOPLANE¸ß¼¶ÃüÁîÊ±£¬¾ÍÔÚÏàÓ¦µÄchannel£¬chip£¬dieÖĞÁ½¸ö²»Í¬µÄplaneÕÒµ½¿ÉÒÔÖ´ĞĞTWOPLANE²Ù×÷µÄblock
-	*²¢ÖÃmuilt_plane_flagÎªTRUE
+	*å½“èƒ½å¤„ç†TWOPLANEé«˜çº§å‘½ä»¤æ—¶ï¼Œå°±åœ¨ç›¸åº”çš„channelï¼Œchipï¼Œdieä¸­ä¸¤ä¸ªä¸åŒçš„planeæ‰¾åˆ°å¯ä»¥æ‰§è¡ŒTWOPLANEæ“ä½œçš„block
+	*å¹¶ç½®muilt_plane_flagä¸ºTRUE
 	*********************************************************************************************************/
 	if((ssd->parameter->advanced_commands&AD_TWOPLANE)==AD_TWOPLANE)
 	{	
@@ -830,8 +830,8 @@ int gc_direct_erase(struct ssd_info *ssd,unsigned int channel,unsigned int chip,
 	}
 
 	/***************************************************************************************
-	*µ±ÄÜ´¦ÀíINTERLEAVE¸ß¼¶ÃüÁîÊ±£¬¾ÍÔÚÏàÓ¦µÄchannel£¬chipÕÒµ½¿ÉÒÔÖ´ĞĞINTERLEAVEµÄÁ½¸öblock
-	*²¢ÖÃinterleaver_flagÎªTRUE
+	*å½“èƒ½å¤„ç†INTERLEAVEé«˜çº§å‘½ä»¤æ—¶ï¼Œå°±åœ¨ç›¸åº”çš„channelï¼Œchipæ‰¾åˆ°å¯ä»¥æ‰§è¡ŒINTERLEAVEçš„ä¸¤ä¸ªblock
+	*å¹¶ç½®interleaver_flagä¸ºTRUE
 	****************************************************************************************/
 	if((ssd->parameter->advanced_commands&AD_INTERLEAVE)==AD_INTERLEAVE)
 	{
@@ -856,10 +856,10 @@ int gc_direct_erase(struct ssd_info *ssd,unsigned int channel,unsigned int chip,
 	}
     
 	/************************************************************************************************************************
-	*A£¬Èç¹û¼È¿ÉÒÔÖ´ĞĞtwoplaneµÄÁ½¸öblockÓÖÓĞ¿ÉÒÔÖ´ĞĞinterleaverµÄÁ½¸öblock£¬ÄÇÃ´¾ÍÖ´ĞĞINTERLEAVE_TWO_PLANEµÄ¸ß¼¶ÃüÁî²Á³ı²Ù×÷
-	*B£¬Èç¹ûÖ»ÓĞÄÜÖ´ĞĞinterleaverµÄÁ½¸öblock£¬ÄÇÃ´¾ÍÖ´ĞĞINTERLEAVE¸ß¼¶ÃüÁîµÄ²Á³ı²Ù×÷
-	*C£¬Èç¹ûÖ»ÓĞÄÜÖ´ĞĞTWO_PLANEµÄÁ½¸öblock£¬ÄÇÃ´¾ÍÖ´ĞĞTWO_PLANE¸ß¼¶ÃüÁîµÄ²Á³ı²Ù×÷
-	*D£¬Ã»ÓĞÉÏÊöÕâĞ©Çé¿ö£¬ÄÇÃ´¾ÍÖ»ÄÜ¹»Ö´ĞĞÆÕÍ¨µÄ²Á³ı²Ù×÷ÁË
+	*Aï¼Œå¦‚æœæ—¢å¯ä»¥æ‰§è¡Œtwoplaneçš„ä¸¤ä¸ªblockåˆæœ‰å¯ä»¥æ‰§è¡Œinterleaverçš„ä¸¤ä¸ªblockï¼Œé‚£ä¹ˆå°±æ‰§è¡ŒINTERLEAVE_TWO_PLANEçš„é«˜çº§å‘½ä»¤æ“¦é™¤æ“ä½œ
+	*Bï¼Œå¦‚æœåªæœ‰èƒ½æ‰§è¡Œinterleaverçš„ä¸¤ä¸ªblockï¼Œé‚£ä¹ˆå°±æ‰§è¡ŒINTERLEAVEé«˜çº§å‘½ä»¤çš„æ“¦é™¤æ“ä½œ
+	*Cï¼Œå¦‚æœåªæœ‰èƒ½æ‰§è¡ŒTWO_PLANEçš„ä¸¤ä¸ªblockï¼Œé‚£ä¹ˆå°±æ‰§è¡ŒTWO_PLANEé«˜çº§å‘½ä»¤çš„æ“¦é™¤æ“ä½œ
+	*Dï¼Œæ²¡æœ‰ä¸Šè¿°è¿™äº›æƒ…å†µï¼Œé‚£ä¹ˆå°±åªèƒ½å¤Ÿæ‰§è¡Œæ™®é€šçš„æ“¦é™¤æ“ä½œäº†
 	*************************************************************************************************************************/
 	if ((muilt_plane_flag==TRUE)&&(interleaver_flag==TRUE)&&((ssd->parameter->advanced_commands&AD_TWOPLANE)==AD_TWOPLANE)&&((ssd->parameter->advanced_commands&AD_INTERLEAVE)==AD_INTERLEAVE))     
 	{
@@ -883,7 +883,7 @@ int gc_direct_erase(struct ssd_info *ssd,unsigned int channel,unsigned int chip,
 		}
 	}
 
-	if ((normal_erase_flag==TRUE))                              /*²»ÊÇÃ¿¸öplane¶¼ÓĞ¿ÉÒÔÖ±½ÓÉ¾³ıµÄblock£¬Ö»¶Ôµ±Ç°plane½øĞĞÆÕÍ¨µÄerase²Ù×÷£¬»òÕßÖ»ÄÜÖ´ĞĞÆÕÍ¨ÃüÁî*/
+	if ((normal_erase_flag==TRUE))                              /*ä¸æ˜¯æ¯ä¸ªplaneéƒ½æœ‰å¯ä»¥ç›´æ¥åˆ é™¤çš„blockï¼Œåªå¯¹å½“å‰planeè¿›è¡Œæ™®é€šçš„eraseæ“ä½œï¼Œæˆ–è€…åªèƒ½æ‰§è¡Œæ™®é€šå‘½ä»¤*/
 	{
 		if (erase_planes(ssd,channel,chip,die,plane,NORMAL)==SUCCESS)
 		{
@@ -891,7 +891,7 @@ int gc_direct_erase(struct ssd_info *ssd,unsigned int channel,unsigned int chip,
 		} 
 		else
 		{
-			return FAILURE;                                     /*Ä¿±êµÄplaneÃ»ÓĞ¿ÉÒÔÖ±½ÓÉ¾³ıµÄblock£¬ĞèÒªÑ°ÕÒÄ¿±ê²Á³ı¿éºóÔÚÊµÊ©²Á³ı²Ù×÷*/
+			return FAILURE;                                     /*ç›®æ ‡çš„planeæ²¡æœ‰å¯ä»¥ç›´æ¥åˆ é™¤çš„blockï¼Œéœ€è¦å¯»æ‰¾ç›®æ ‡æ“¦é™¤å—ååœ¨å®æ–½æ“¦é™¤æ“ä½œ*/
 		}
 	}
 	return SUCCESS;
@@ -907,14 +907,14 @@ Status move_page(struct ssd_info * ssd, struct local *location, unsigned int * t
 	lpn=ssd->channel_head[location->channel].chip_head[location->chip].die_head[location->die].plane_head[location->plane].blk_head[location->block].page_head[location->page].lpn;
 	valid_state=ssd->channel_head[location->channel].chip_head[location->chip].die_head[location->die].plane_head[location->plane].blk_head[location->block].page_head[location->page].valid_state;
 	free_state=ssd->channel_head[location->channel].chip_head[location->chip].die_head[location->die].plane_head[location->plane].blk_head[location->block].page_head[location->page].free_state;
-	old_ppn=find_ppn(ssd,location->channel,location->chip,location->die,location->plane,location->block,location->page);      /*¼ÇÂ¼Õâ¸öÓĞĞ§ÒÆ¶¯Ò³µÄppn£¬¶Ô±Èmap»òÕß¶îÍâÓ³Éä¹ØÏµÖĞµÄppn£¬½øĞĞÉ¾³ıºÍÌí¼Ó²Ù×÷*/
-	ppn=get_ppn_for_gc(ssd,location->channel,location->chip,location->die,location->plane);                /*ÕÒ³öÀ´µÄppnÒ»¶¨ÊÇÔÚ·¢Éúgc²Ù×÷µÄplaneÖĞ,²ÅÄÜÊ¹ÓÃcopyback²Ù×÷£¬Îªgc²Ù×÷»ñÈ¡ppn*/
+	old_ppn=find_ppn(ssd,location->channel,location->chip,location->die,location->plane,location->block,location->page);      /*è®°å½•è¿™ä¸ªæœ‰æ•ˆç§»åŠ¨é¡µçš„ppnï¼Œå¯¹æ¯”mapæˆ–è€…é¢å¤–æ˜ å°„å…³ç³»ä¸­çš„ppnï¼Œè¿›è¡Œåˆ é™¤å’Œæ·»åŠ æ“ä½œ*/
+	ppn=get_ppn_for_gc(ssd,location->channel,location->chip,location->die,location->plane);                /*æ‰¾å‡ºæ¥çš„ppnä¸€å®šæ˜¯åœ¨å‘ç”Ÿgcæ“ä½œçš„planeä¸­,æ‰èƒ½ä½¿ç”¨copybackæ“ä½œï¼Œä¸ºgcæ“ä½œè·å–ppn*/
 
-	new_location=find_location(ssd,ppn);                                                                   /*¸ù¾İĞÂ»ñµÃµÄppn»ñÈ¡new_location*/
+	new_location=find_location(ssd,ppn);                                                                   /*æ ¹æ®æ–°è·å¾—çš„ppnè·å–new_location*/
 
 	if ((ssd->parameter->advanced_commands&AD_COPYBACK)==AD_COPYBACK)
 	{
-		if (ssd->parameter->greed_CB_ad==1)                                                                /*Ì°À·µØÊ¹ÓÃ¸ß¼¶ÃüÁî*/
+		if (ssd->parameter->greed_CB_ad==1)                                                                /*è´ªå©ªåœ°ä½¿ç”¨é«˜çº§å‘½ä»¤*/
 		{
 			ssd->copy_back_count++;
 			ssd->gc_copy_back++;
@@ -928,7 +928,7 @@ Status move_page(struct ssd_info * ssd, struct local *location, unsigned int * t
 				free(new_location);
 				new_location=NULL;
 
-				ppn=get_ppn_for_gc(ssd,location->channel,location->chip,location->die,location->plane);    /*ÕÒ³öÀ´µÄppnÒ»¶¨ÊÇÔÚ·¢Éúgc²Ù×÷µÄplaneÖĞ£¬²¢ÇÒÂú×ãÆæÅ¼µØÖ·ÏŞÖÆ,²ÅÄÜÊ¹ÓÃcopyback²Ù×÷*/
+				ppn=get_ppn_for_gc(ssd,location->channel,location->chip,location->die,location->plane);    /*æ‰¾å‡ºæ¥çš„ppnä¸€å®šæ˜¯åœ¨å‘ç”Ÿgcæ“ä½œçš„planeä¸­ï¼Œå¹¶ä¸”æ»¡è¶³å¥‡å¶åœ°å€é™åˆ¶,æ‰èƒ½ä½¿ç”¨copybackæ“ä½œ*/
 				ssd->program_count--;
 				ssd->write_flash_count--;
 				ssd->waste_page_count++;
@@ -970,7 +970,7 @@ Status move_page(struct ssd_info * ssd, struct local *location, unsigned int * t
 	ssd->channel_head[location->channel].chip_head[location->chip].die_head[location->die].plane_head[location->plane].blk_head[location->block].page_head[location->page].valid_state=0;
 	ssd->channel_head[location->channel].chip_head[location->chip].die_head[location->die].plane_head[location->plane].blk_head[location->block].invalid_page_num++;
 
-	if (old_ppn==ssd->dram->map->map_entry[lpn].pn)                                                     /*ĞŞ¸ÄÓ³Éä±í*/
+	if (old_ppn==ssd->dram->map->map_entry[lpn].pn)                                                     /*ä¿®æ”¹æ˜ å°„è¡¨*/
 	{
 		ssd->dram->map->map_entry[lpn].pn=ppn;
 	}
@@ -982,17 +982,17 @@ Status move_page(struct ssd_info * ssd, struct local *location, unsigned int * t
 }
 
 /*******************************************************************************************************************************************
-*Ä¿±êµÄplaneÃ»ÓĞ¿ÉÒÔÖ±½ÓÉ¾³ıµÄblock£¬ĞèÒªÑ°ÕÒÄ¿±ê²Á³ı¿éºóÔÚÊµÊ©²Á³ı²Ù×÷£¬ÓÃÔÚ²»ÄÜÖĞ¶ÏµÄgc²Ù×÷ÖĞ£¬³É¹¦É¾³ıÒ»¸ö¿é£¬·µ»Ø1£¬Ã»ÓĞÉ¾³ıÒ»¸ö¿é·µ»Ø-1
-*ÔÚÕâ¸öº¯ÊıÖĞ£¬²»ÓÃ¿¼ÂÇÄ¿±êchannel,dieÊÇ·ñÊÇ¿ÕÏĞµÄ,²Á³ıinvalid_page_num×î¶àµÄblock
+*ç›®æ ‡çš„planeæ²¡æœ‰å¯ä»¥ç›´æ¥åˆ é™¤çš„blockï¼Œéœ€è¦å¯»æ‰¾ç›®æ ‡æ“¦é™¤å—ååœ¨å®æ–½æ“¦é™¤æ“ä½œï¼Œç”¨åœ¨ä¸èƒ½ä¸­æ–­çš„gcæ“ä½œä¸­ï¼ŒæˆåŠŸåˆ é™¤ä¸€ä¸ªå—ï¼Œè¿”å›1ï¼Œæ²¡æœ‰åˆ é™¤ä¸€ä¸ªå—è¿”å›-1
+*åœ¨è¿™ä¸ªå‡½æ•°ä¸­ï¼Œä¸ç”¨è€ƒè™‘ç›®æ ‡channel,dieæ˜¯å¦æ˜¯ç©ºé—²çš„,æ“¦é™¤invalid_page_numæœ€å¤šçš„block
 ********************************************************************************************************************************************/
 int uninterrupt_gc(struct ssd_info *ssd,unsigned int channel,unsigned int chip,unsigned int die,unsigned int plane)       
 {
 	unsigned int i=0,invalid_page=0;
-	unsigned int block,active_block,transfer_size,free_page,page_move_count=0;                           /*¼ÇÂ¼Ê§Ğ§Ò³×î¶àµÄ¿éºÅ*/
+	unsigned int block,active_block,transfer_size,free_page,page_move_count=0;                           /*è®°å½•å¤±æ•ˆé¡µæœ€å¤šçš„å—å·*/
 	struct local *  location=NULL;
 	unsigned int total_invalid_page_num=0;
 
-	if(find_active_block(ssd,channel,chip,die,plane)!=SUCCESS)                                           /*»ñÈ¡»îÔ¾¿é*/
+	if(find_active_block(ssd,channel,chip,die,plane)!=SUCCESS)                                           /*è·å–æ´»è·ƒå—*/
 	{
 		printf("\n\n Error in uninterrupt_gc().\n");
 		return ERROR;
@@ -1002,7 +1002,7 @@ int uninterrupt_gc(struct ssd_info *ssd,unsigned int channel,unsigned int chip,u
 	invalid_page=0;
 	transfer_size=0;
 	block=-1;
-	for(i=0;i<ssd->parameter->block_plane;i++)                                                           /*²éÕÒ×î¶àinvalid_pageµÄ¿éºÅ£¬ÒÔ¼°×î´óµÄinvalid_page_num*/
+	for(i=0;i<ssd->parameter->block_plane;i++)                                                           /*æŸ¥æ‰¾æœ€å¤šinvalid_pageçš„å—å·ï¼Œä»¥åŠæœ€å¤§çš„invalid_page_num*/
 	{	
 		total_invalid_page_num+=ssd->channel_head[channel].chip_head[chip].die_head[die].plane_head[plane].blk_head[i].invalid_page_num;
 		if((active_block!=i)&&(ssd->channel_head[channel].chip_head[chip].die_head[die].plane_head[plane].blk_head[i].invalid_page_num>invalid_page))						
@@ -1022,7 +1022,7 @@ int uninterrupt_gc(struct ssd_info *ssd,unsigned int channel,unsigned int chip,u
 	//}
 
 	free_page=0;
-	for(i=0;i<ssd->parameter->page_block;i++)		                                                     /*Öğ¸ö¼ì²éÃ¿¸öpage£¬Èç¹ûÓĞÓĞĞ§Êı¾İµÄpageĞèÒªÒÆ¶¯µ½ÆäËûµØ·½´æ´¢*/		
+	for(i=0;i<ssd->parameter->page_block;i++)		                                                     /*é€ä¸ªæ£€æŸ¥æ¯ä¸ªpageï¼Œå¦‚æœæœ‰æœ‰æ•ˆæ•°æ®çš„pageéœ€è¦ç§»åŠ¨åˆ°å…¶ä»–åœ°æ–¹å­˜å‚¨*/		
 	{		
 		if ((ssd->channel_head[channel].chip_head[chip].die_head[die].plane_head[plane].blk_head[block].page_head[i].free_state&PG_SUB)==0x0000000f)
 		{
@@ -1032,7 +1032,7 @@ int uninterrupt_gc(struct ssd_info *ssd,unsigned int channel,unsigned int chip,u
 		{
 			printf("\ntoo much free page. \t %d\t .%d\t%d\t%d\t%d\t\n",free_page,channel,chip,die,plane);
 		}
-		if(ssd->channel_head[channel].chip_head[chip].die_head[die].plane_head[plane].blk_head[block].page_head[i].valid_state>0) /*¸ÃÒ³ÊÇÓĞĞ§Ò³£¬ĞèÒªcopyback²Ù×÷*/		
+		if(ssd->channel_head[channel].chip_head[chip].die_head[die].plane_head[plane].blk_head[block].page_head[i].valid_state>0) /*è¯¥é¡µæ˜¯æœ‰æ•ˆé¡µï¼Œéœ€è¦copybackæ“ä½œ*/		
 		{	
 			location=(struct local * )malloc(sizeof(struct local ));
 			alloc_assert(location,"location");
@@ -1044,14 +1044,14 @@ int uninterrupt_gc(struct ssd_info *ssd,unsigned int channel,unsigned int chip,u
 			location->plane=plane;
 			location->block=block;
 			location->page=i;
-			move_page( ssd, location, &transfer_size);                                                   /*ÕæÊµµÄmove_page²Ù×÷*/
+			move_page( ssd, location, &transfer_size);                                                   /*çœŸå®çš„move_pageæ“ä½œ*/
 			page_move_count++;
 
 			free(location);	
 			location=NULL;
 		}				
 	}
-	erase_operation(ssd,channel ,chip , die,plane ,block);	                                              /*Ö´ĞĞÍêmove_page²Ù×÷ºó£¬¾ÍÁ¢¼´Ö´ĞĞblockµÄ²Á³ı²Ù×÷*/
+	erase_operation(ssd,channel ,chip , die,plane ,block);	                                              /*æ‰§è¡Œå®Œmove_pageæ“ä½œåï¼Œå°±ç«‹å³æ‰§è¡Œblockçš„æ“¦é™¤æ“ä½œ*/
 
 	ssd->channel_head[channel].current_state=CHANNEL_GC;									
 	ssd->channel_head[channel].current_time=ssd->current_time;										
@@ -1061,8 +1061,8 @@ int uninterrupt_gc(struct ssd_info *ssd,unsigned int channel,unsigned int chip,u
 	ssd->channel_head[channel].chip_head[chip].next_state=CHIP_IDLE;			
 	
 	/***************************************************************
-	*ÔÚ¿ÉÖ´ĞĞCOPYBACK¸ß¼¶ÃüÁîÓë²»¿ÉÖ´ĞĞCOPYBACK¸ß¼¶ÃüÁîÕâÁ½ÖÖÇé¿öÏÂ£¬
-	*channelÏÂ¸ö×´Ì¬Ê±¼äµÄ¼ÆËã£¬ÒÔ¼°chipÏÂ¸ö×´Ì¬Ê±¼äµÄ¼ÆËã
+	*åœ¨å¯æ‰§è¡ŒCOPYBACKé«˜çº§å‘½ä»¤ä¸ä¸å¯æ‰§è¡ŒCOPYBACKé«˜çº§å‘½ä»¤è¿™ä¸¤ç§æƒ…å†µä¸‹ï¼Œ
+	*channelä¸‹ä¸ªçŠ¶æ€æ—¶é—´çš„è®¡ç®—ï¼Œä»¥åŠchipä¸‹ä¸ªçŠ¶æ€æ—¶é—´çš„è®¡ç®—
 	***************************************************************/
 	if ((ssd->parameter->advanced_commands&AD_COPYBACK)==AD_COPYBACK)
 	{
@@ -1086,8 +1086,8 @@ int uninterrupt_gc(struct ssd_info *ssd,unsigned int channel,unsigned int chip,u
 
 
 /*******************************************************************************************************************************************
-*Ä¿±êµÄplaneÃ»ÓĞ¿ÉÒÔÖ±½ÓÉ¾³ıµÄblock£¬ĞèÒªÑ°ÕÒÄ¿±ê²Á³ı¿éºóÔÚÊµÊ©²Á³ı²Ù×÷£¬ÓÃÔÚ¿ÉÒÔÖĞ¶ÏµÄgc²Ù×÷ÖĞ£¬³É¹¦É¾³ıÒ»¸ö¿é£¬·µ»Ø1£¬Ã»ÓĞÉ¾³ıÒ»¸ö¿é·µ»Ø-1
-*ÔÚÕâ¸öº¯ÊıÖĞ£¬²»ÓÃ¿¼ÂÇÄ¿±êchannel,dieÊÇ·ñÊÇ¿ÕÏĞµÄ
+*ç›®æ ‡çš„planeæ²¡æœ‰å¯ä»¥ç›´æ¥åˆ é™¤çš„blockï¼Œéœ€è¦å¯»æ‰¾ç›®æ ‡æ“¦é™¤å—ååœ¨å®æ–½æ“¦é™¤æ“ä½œï¼Œç”¨åœ¨å¯ä»¥ä¸­æ–­çš„gcæ“ä½œä¸­ï¼ŒæˆåŠŸåˆ é™¤ä¸€ä¸ªå—ï¼Œè¿”å›1ï¼Œæ²¡æœ‰åˆ é™¤ä¸€ä¸ªå—è¿”å›-1
+*åœ¨è¿™ä¸ªå‡½æ•°ä¸­ï¼Œä¸ç”¨è€ƒè™‘ç›®æ ‡channel,dieæ˜¯å¦æ˜¯ç©ºé—²çš„
 ********************************************************************************************************************************************/
 int interrupt_gc(struct ssd_info *ssd,unsigned int channel,unsigned int chip,unsigned int die,unsigned int plane,struct gc_operation *gc_node)        
 {
@@ -1109,7 +1109,7 @@ int interrupt_gc(struct ssd_info *ssd,unsigned int channel,unsigned int chip,uns
 		gc_node->block=block;
 	}
 
-	if (ssd->channel_head[channel].chip_head[chip].die_head[die].plane_head[plane].blk_head[gc_node->block].invalid_page_num!=ssd->parameter->page_block)     /*»¹ĞèÒªÖ´ĞĞcopyback²Ù×÷*/
+	if (ssd->channel_head[channel].chip_head[chip].die_head[die].plane_head[plane].blk_head[gc_node->block].invalid_page_num!=ssd->parameter->page_block)     /*è¿˜éœ€è¦æ‰§è¡Œcopybackæ“ä½œ*/
 	{
 		for (i=gc_node->page;i<ssd->parameter->page_block;i++)
 		{
@@ -1169,7 +1169,7 @@ int interrupt_gc(struct ssd_info *ssd,unsigned int channel,unsigned int chip,uns
 		ssd->channel_head[channel].chip_head[chip].next_state=CHIP_IDLE;							
 		ssd->channel_head[channel].chip_head[chip].next_state_predict_time=ssd->channel_head[channel].next_state_predict_time+ssd->parameter->time_characteristics.tBERS;
 
-		return 1;                                                                      /*¸Ãgc²Ù×÷Íê³É£¬·µ»Ø1£¬¿ÉÒÔ½«channelÉÏµÄgcÇëÇó½ÚµãÉ¾³ı*/
+		return 1;                                                                      /*è¯¥gcæ“ä½œå®Œæˆï¼Œè¿”å›1ï¼Œå¯ä»¥å°†channelä¸Šçš„gcè¯·æ±‚èŠ‚ç‚¹åˆ é™¤*/
 	}
 
 	printf("there is a problem in interrupt_gc\n");
@@ -1177,7 +1177,7 @@ int interrupt_gc(struct ssd_info *ssd,unsigned int channel,unsigned int chip,uns
 }
 
 /*************************************************************
-*º¯ÊıµÄ¹¦ÄÜÊÇµ±´¦ÀíÍêÒ»¸ögc²Ù×÷Ê±£¬ĞèÒª°ÑgcÁ´ÉÏµÄgc_nodeÉ¾³ıµô
+*å‡½æ•°çš„åŠŸèƒ½æ˜¯å½“å¤„ç†å®Œä¸€ä¸ªgcæ“ä½œæ—¶ï¼Œéœ€è¦æŠŠgcé“¾ä¸Šçš„gc_nodeåˆ é™¤æ‰
 **************************************************************/
 int delete_gc_node(struct ssd_info *ssd, unsigned int channel,struct gc_operation *gc_node)
 {
@@ -1211,7 +1211,7 @@ int delete_gc_node(struct ssd_info *ssd, unsigned int channel,struct gc_operatio
 }
 
 /***************************************
-*Õâ¸öº¯ÊıµÄ¹¦ÄÜÊÇ´¦ÀíchannelµÄÃ¿¸ögc²Ù×÷
+*è¿™ä¸ªå‡½æ•°çš„åŠŸèƒ½æ˜¯å¤„ç†channelçš„æ¯ä¸ªgcæ“ä½œ
 ****************************************/
 Status gc_for_channel(struct ssd_info *ssd, unsigned int channel)
 {
@@ -1222,9 +1222,9 @@ Status gc_for_channel(struct ssd_info *ssd, unsigned int channel)
 	struct gc_operation *gc_node=NULL,*gc_p=NULL;
 
 	/*******************************************************************************************
-	*²éÕÒÃ¿Ò»¸ögc_node£¬»ñÈ¡gc_nodeËùÔÚµÄchipµÄµ±Ç°×´Ì¬£¬ÏÂ¸ö×´Ì¬£¬ÏÂ¸ö×´Ì¬µÄÔ¤¼ÆÊ±¼ä
-	*Èç¹ûµ±Ç°×´Ì¬ÊÇ¿ÕÏĞ£¬»òÊÇÏÂ¸ö×´Ì¬ÊÇ¿ÕÏĞ¶øÏÂ¸ö×´Ì¬µÄÔ¤¼ÆÊ±¼äĞ¡ÓÚµ±Ç°Ê±¼ä£¬²¢ÇÒÊÇ²»¿ÉÖĞ¶ÏµÄgc
-	*ÄÇÃ´¾Íflag_priorityÁîÎª1£¬·ñÔòÎª0
+	*æŸ¥æ‰¾æ¯ä¸€ä¸ªgc_nodeï¼Œè·å–gc_nodeæ‰€åœ¨çš„chipçš„å½“å‰çŠ¶æ€ï¼Œä¸‹ä¸ªçŠ¶æ€ï¼Œä¸‹ä¸ªçŠ¶æ€çš„é¢„è®¡æ—¶é—´
+	*å¦‚æœå½“å‰çŠ¶æ€æ˜¯ç©ºé—²ï¼Œæˆ–æ˜¯ä¸‹ä¸ªçŠ¶æ€æ˜¯ç©ºé—²è€Œä¸‹ä¸ªçŠ¶æ€çš„é¢„è®¡æ—¶é—´å°äºå½“å‰æ—¶é—´ï¼Œå¹¶ä¸”æ˜¯ä¸å¯ä¸­æ–­çš„gc
+	*é‚£ä¹ˆå°±flag_priorityä»¤ä¸º1ï¼Œå¦åˆ™ä¸º0
 	********************************************************************************************/
 	gc_node=ssd->channel_head[channel].gc_command;
 	while (gc_node!=NULL)
@@ -1234,7 +1234,7 @@ Status gc_for_channel(struct ssd_info *ssd, unsigned int channel)
 		next_state_predict_time=ssd->channel_head[channel].chip_head[gc_node->chip].next_state_predict_time;
 		if((current_state==CHIP_IDLE)||((next_state==CHIP_IDLE)&&(next_state_predict_time<=ssd->current_time)))
 		{
-			if (gc_node->priority==GC_UNINTERRUPT)                                     /*Õâ¸ögcÇëÇóÊÇ²»¿ÉÖĞ¶ÏµÄ£¬ÓÅÏÈ·şÎñÕâ¸ögc²Ù×÷*/
+			if (gc_node->priority==GC_UNINTERRUPT)                                     /*è¿™ä¸ªgcè¯·æ±‚æ˜¯ä¸å¯ä¸­æ–­çš„ï¼Œä¼˜å…ˆæœåŠ¡è¿™ä¸ªgcæ“ä½œ*/
 			{
 				flag_priority=1;
 				break;
@@ -1242,7 +1242,7 @@ Status gc_for_channel(struct ssd_info *ssd, unsigned int channel)
 		}
 		gc_node=gc_node->next_node;
 	}
-	if (flag_priority!=1)                                                              /*Ã»ÓĞÕÒµ½²»¿ÉÖĞ¶ÏµÄgcÇëÇó£¬Ê×ÏÈÖ´ĞĞ¶ÓÊ×µÄgcÇëÇó*/
+	if (flag_priority!=1)                                                              /*æ²¡æœ‰æ‰¾åˆ°ä¸å¯ä¸­æ–­çš„gcè¯·æ±‚ï¼Œé¦–å…ˆæ‰§è¡Œé˜Ÿé¦–çš„gcè¯·æ±‚*/
 	{
 		gc_node=ssd->channel_head[channel].gc_command;
 		while (gc_node!=NULL)
@@ -1251,7 +1251,7 @@ Status gc_for_channel(struct ssd_info *ssd, unsigned int channel)
 			next_state=ssd->channel_head[channel].chip_head[gc_node->chip].next_state;
 			next_state_predict_time=ssd->channel_head[channel].chip_head[gc_node->chip].next_state_predict_time;
 			 /**********************************************
-			 *ĞèÒªgc²Ù×÷µÄÄ¿±êchipÊÇ¿ÕÏĞµÄ£¬²Å¿ÉÒÔ½øĞĞgc²Ù×÷
+			 *éœ€è¦gcæ“ä½œçš„ç›®æ ‡chipæ˜¯ç©ºé—²çš„ï¼Œæ‰å¯ä»¥è¿›è¡Œgcæ“ä½œ
 			 ***********************************************/
 			if((current_state==CHIP_IDLE)||((next_state==CHIP_IDLE)&&(next_state_predict_time<=ssd->current_time)))   
 			{
@@ -1275,7 +1275,7 @@ Status gc_for_channel(struct ssd_info *ssd, unsigned int channel)
 		flag_direct_erase=gc_direct_erase(ssd,channel,chip,die,plane);
 		if (flag_direct_erase!=SUCCESS)
 		{
-			flag_gc=uninterrupt_gc(ssd,channel,chip,die,plane);                         /*µ±Ò»¸öÍêÕûµÄgc²Ù×÷Íê³ÉÊ±£¨ÒÑ¾­²Á³ıÒ»¸ö¿é£¬»ØÊÕÁËÒ»¶¨ÊıÁ¿µÄflash¿Õ¼ä£©£¬·µ»Ø1£¬½«channelÉÏÏàÓ¦µÄgc²Ù×÷ÇëÇó½ÚµãÉ¾³ı*/
+			flag_gc=uninterrupt_gc(ssd,channel,chip,die,plane);                         /*å½“ä¸€ä¸ªå®Œæ•´çš„gcæ“ä½œå®Œæˆæ—¶ï¼ˆå·²ç»æ“¦é™¤ä¸€ä¸ªå—ï¼Œå›æ”¶äº†ä¸€å®šæ•°é‡çš„flashç©ºé—´ï¼‰ï¼Œè¿”å›1ï¼Œå°†channelä¸Šç›¸åº”çš„gcæ“ä½œè¯·æ±‚èŠ‚ç‚¹åˆ é™¤*/
 			if (flag_gc==1)
 			{
 				delete_gc_node(ssd,channel,gc_node);
@@ -1288,19 +1288,19 @@ Status gc_for_channel(struct ssd_info *ssd, unsigned int channel)
 		return SUCCESS;
 	}
 	/*******************************************************************************
-	*¿ÉÖĞ¶ÏµÄgcÇëÇó£¬ĞèÒªÊ×ÏÈÈ·ÈÏ¸ÃchannelÉÏÃ»ÓĞ×ÓÇëÇóÔÚÕâ¸öÊ±¿ÌĞèÒªÊ¹ÓÃÕâ¸öchannel£¬
-	*Ã»ÓĞµÄ»°£¬ÔÚÖ´ĞĞgc²Ù×÷£¬ÓĞµÄ»°£¬²»Ö´ĞĞgc²Ù×÷
+	*å¯ä¸­æ–­çš„gcè¯·æ±‚ï¼Œéœ€è¦é¦–å…ˆç¡®è®¤è¯¥channelä¸Šæ²¡æœ‰å­è¯·æ±‚åœ¨è¿™ä¸ªæ—¶åˆ»éœ€è¦ä½¿ç”¨è¿™ä¸ªchannelï¼Œ
+	*æ²¡æœ‰çš„è¯ï¼Œåœ¨æ‰§è¡Œgcæ“ä½œï¼Œæœ‰çš„è¯ï¼Œä¸æ‰§è¡Œgcæ“ä½œ
 	********************************************************************************/
 	else        
 	{
-		flag_invoke_gc=decide_gc_invoke(ssd,channel);                                  /*ÅĞ¶ÏÊÇ·ñÓĞ×ÓÇëÇóĞèÒªchannel£¬Èç¹ûÓĞ×ÓÇëÇóĞèÒªÕâ¸öchannel£¬ÄÇÃ´Õâ¸ögc²Ù×÷¾Í±»ÖĞ¶ÏÁË*/
+		flag_invoke_gc=decide_gc_invoke(ssd,channel);                                  /*åˆ¤æ–­æ˜¯å¦æœ‰å­è¯·æ±‚éœ€è¦channelï¼Œå¦‚æœæœ‰å­è¯·æ±‚éœ€è¦è¿™ä¸ªchannelï¼Œé‚£ä¹ˆè¿™ä¸ªgcæ“ä½œå°±è¢«ä¸­æ–­äº†*/
 
 		if (flag_invoke_gc==1)
 		{
 			flag_direct_erase=gc_direct_erase(ssd,channel,chip,die,plane);
 			if (flag_direct_erase==-1)
 			{
-				flag_gc=interrupt_gc(ssd,channel,chip,die,plane,gc_node);             /*µ±Ò»¸öÍêÕûµÄgc²Ù×÷Íê³ÉÊ±£¨ÒÑ¾­²Á³ıÒ»¸ö¿é£¬»ØÊÕÁËÒ»¶¨ÊıÁ¿µÄflash¿Õ¼ä£©£¬·µ»Ø1£¬½«channelÉÏÏàÓ¦µÄgc²Ù×÷ÇëÇó½ÚµãÉ¾³ı*/
+				flag_gc=interrupt_gc(ssd,channel,chip,die,plane,gc_node);             /*å½“ä¸€ä¸ªå®Œæ•´çš„gcæ“ä½œå®Œæˆæ—¶ï¼ˆå·²ç»æ“¦é™¤ä¸€ä¸ªå—ï¼Œå›æ”¶äº†ä¸€å®šæ•°é‡çš„flashç©ºé—´ï¼‰ï¼Œè¿”å›1ï¼Œå°†channelä¸Šç›¸åº”çš„gcæ“ä½œè¯·æ±‚èŠ‚ç‚¹åˆ é™¤*/
 				if (flag_gc==1)
 				{
 					delete_gc_node(ssd,channel,gc_node);
@@ -1322,13 +1322,13 @@ Status gc_for_channel(struct ssd_info *ssd, unsigned int channel)
 
 
 /************************************************************************************************************
-*flagÓÃÀ´±ê¼Çgcº¯ÊıÊÇÔÚssdÕû¸ö¶¼ÊÇidleµÄÇé¿öÏÂ±»µ÷ÓÃµÄ£¨1£©£¬»¹ÊÇÈ·¶¨ÁËchannel£¬chip£¬die£¬plane±»µ÷ÓÃ£¨0£©
-*½øÈëgcº¯Êı£¬ĞèÒªÅĞ¶ÏÊÇ·ñÊÇ²»¿ÉÖĞ¶ÏµÄgc²Ù×÷£¬Èç¹ûÊÇ£¬ĞèÒª½«Ò»Õû¿éÄ¿±êblockÍêÈ«²Á³ıºó²ÅËãÍê³É£»Èç¹ûÊÇ¿ÉÖĞ¶ÏµÄ£¬
-*ÔÚ½øĞĞGC²Ù×÷Ç°£¬ĞèÒªÅĞ¶Ï¸Ãchannel£¬dieÊÇ·ñÓĞ×ÓÇëÇóÔÚµÈ´ı²Ù×÷£¬Èç¹ûÃ»ÓĞÔò¿ªÊ¼Ò»²½Ò»²½µÄ²Ù×÷£¬ÕÒµ½Ä¿±ê
-*¿éºó£¬Ò»´ÎÖ´ĞĞÒ»¸öcopyback²Ù×÷£¬Ìø³ögcº¯Êı£¬´ıÊ±¼äÏòÇ°ÍÆ½øºó£¬ÔÙ×öÏÂÒ»¸öcopyback»òÕßerase²Ù×÷
-*½øÈëgcº¯Êı²»Ò»¶¨ĞèÒª½øĞĞgc²Ù×÷£¬ĞèÒª½øĞĞÒ»¶¨µÄÅĞ¶Ï£¬µ±´¦ÓÚÓ²ãĞÖµÒÔÏÂÊ±£¬±ØĞë½øĞĞgc²Ù×÷£»µ±´¦ÓÚÈíãĞÖµÒÔÏÂÊ±£¬
-*ĞèÒªÅĞ¶Ï£¬¿´Õâ¸öchannelÉÏÊÇ·ñÓĞ×ÓÇëÇóÔÚµÈ´ı(ÓĞĞ´×ÓÇëÇóµÈ´ı¾Í²»ĞĞ£¬gcµÄÄ¿±êdie´¦ÓÚbusy×´Ì¬Ò²²»ĞĞ)£¬Èç¹û
-*ÓĞ¾Í²»Ö´ĞĞgc£¬Ìø³ö£¬·ñÔò¿ÉÒÔÖ´ĞĞÒ»²½²Ù×÷
+*flagç”¨æ¥æ ‡è®°gcå‡½æ•°æ˜¯åœ¨ssdæ•´ä¸ªéƒ½æ˜¯idleçš„æƒ…å†µä¸‹è¢«è°ƒç”¨çš„ï¼ˆ1ï¼‰ï¼Œè¿˜æ˜¯ç¡®å®šäº†channelï¼Œchipï¼Œdieï¼Œplaneè¢«è°ƒç”¨ï¼ˆ0ï¼‰
+*è¿›å…¥gcå‡½æ•°ï¼Œéœ€è¦åˆ¤æ–­æ˜¯å¦æ˜¯ä¸å¯ä¸­æ–­çš„gcæ“ä½œï¼Œå¦‚æœæ˜¯ï¼Œéœ€è¦å°†ä¸€æ•´å—ç›®æ ‡blockå®Œå…¨æ“¦é™¤åæ‰ç®—å®Œæˆï¼›å¦‚æœæ˜¯å¯ä¸­æ–­çš„ï¼Œ
+*åœ¨è¿›è¡ŒGCæ“ä½œå‰ï¼Œéœ€è¦åˆ¤æ–­è¯¥channelï¼Œdieæ˜¯å¦æœ‰å­è¯·æ±‚åœ¨ç­‰å¾…æ“ä½œï¼Œå¦‚æœæ²¡æœ‰åˆ™å¼€å§‹ä¸€æ­¥ä¸€æ­¥çš„æ“ä½œï¼Œæ‰¾åˆ°ç›®æ ‡
+*å—åï¼Œä¸€æ¬¡æ‰§è¡Œä¸€ä¸ªcopybackæ“ä½œï¼Œè·³å‡ºgcå‡½æ•°ï¼Œå¾…æ—¶é—´å‘å‰æ¨è¿›åï¼Œå†åšä¸‹ä¸€ä¸ªcopybackæˆ–è€…eraseæ“ä½œ
+*è¿›å…¥gcå‡½æ•°ä¸ä¸€å®šéœ€è¦è¿›è¡Œgcæ“ä½œï¼Œéœ€è¦è¿›è¡Œä¸€å®šçš„åˆ¤æ–­ï¼Œå½“å¤„äºç¡¬é˜ˆå€¼ä»¥ä¸‹æ—¶ï¼Œå¿…é¡»è¿›è¡Œgcæ“ä½œï¼›å½“å¤„äºè½¯é˜ˆå€¼ä»¥ä¸‹æ—¶ï¼Œ
+*éœ€è¦åˆ¤æ–­ï¼Œçœ‹è¿™ä¸ªchannelä¸Šæ˜¯å¦æœ‰å­è¯·æ±‚åœ¨ç­‰å¾…(æœ‰å†™å­è¯·æ±‚ç­‰å¾…å°±ä¸è¡Œï¼Œgcçš„ç›®æ ‡dieå¤„äºbusyçŠ¶æ€ä¹Ÿä¸è¡Œ)ï¼Œå¦‚æœ
+*æœ‰å°±ä¸æ‰§è¡Œgcï¼Œè·³å‡ºï¼Œå¦åˆ™å¯ä»¥æ‰§è¡Œä¸€æ­¥æ“ä½œ
 ************************************************************************************************************/
 unsigned int gc(struct ssd_info *ssd,unsigned int channel, unsigned int flag)
 {
@@ -1337,7 +1337,7 @@ unsigned int gc(struct ssd_info *ssd,unsigned int channel, unsigned int flag)
 	unsigned int flag_priority=0;
 	struct gc_operation *gc_node=NULL,*gc_p=NULL;
 
-	if (flag==1)                                                                       /*Õû¸össd¶¼ÊÇIDELµÄÇé¿ö*/
+	if (flag==1)                                                                       /*æ•´ä¸ªssdéƒ½æ˜¯IDELçš„æƒ…å†µ*/
 	{
 		for (i=0;i<ssd->parameter->channel_number;i++)
 		{
@@ -1359,11 +1359,11 @@ unsigned int gc(struct ssd_info *ssd,unsigned int channel, unsigned int flag)
 		return SUCCESS;
 
 	} 
-	else                                                                               /*Ö»ĞèÕë¶ÔÄ³¸öÌØ¶¨µÄchannel£¬chip£¬die½øĞĞgcÇëÇóµÄ²Ù×÷(Ö»Ğè¶ÔÄ¿±êdie½øĞĞÅĞ¶¨£¬¿´ÊÇ²»ÊÇidle£©*/
+	else                                                                               /*åªéœ€é’ˆå¯¹æŸä¸ªç‰¹å®šçš„channelï¼Œchipï¼Œdieè¿›è¡Œgcè¯·æ±‚çš„æ“ä½œ(åªéœ€å¯¹ç›®æ ‡dieè¿›è¡Œåˆ¤å®šï¼Œçœ‹æ˜¯ä¸æ˜¯idleï¼‰*/
 	{
 		if ((ssd->parameter->allocation_scheme==1)||((ssd->parameter->allocation_scheme==0)&&(ssd->parameter->dynamic_allocation==1)))
 		{
-			if ((ssd->channel_head[channel].subs_r_head!=NULL)||(ssd->channel_head[channel].subs_w_head!=NULL))    /*¶ÓÁĞÉÏÓĞÇëÇó£¬ÏÈ·şÎñÇëÇó*/
+			if ((ssd->channel_head[channel].subs_r_head!=NULL)||(ssd->channel_head[channel].subs_w_head!=NULL))    /*é˜Ÿåˆ—ä¸Šæœ‰è¯·æ±‚ï¼Œå…ˆæœåŠ¡è¯·æ±‚*/
 			{
 				return 0;
 			}
@@ -1377,17 +1377,17 @@ unsigned int gc(struct ssd_info *ssd,unsigned int channel, unsigned int flag)
 
 
 /**********************************************************
-*ÅĞ¶ÏÊÇ·ñÓĞ×ÓÇëÇóÑªÒ©channel£¬Èô¹ûÃ»ÓĞ·µ»Ø1¾Í¿ÉÒÔ·¢ËÍgc²Ù×÷
-*Èç¹ûÓĞ·µ»Ø0£¬¾Í²»ÄÜÖ´ĞĞgc²Ù×÷£¬gc²Ù×÷±»ÖĞ¶Ï
+*åˆ¤æ–­æ˜¯å¦æœ‰å­è¯·æ±‚è¡€è¯channelï¼Œè‹¥æœæ²¡æœ‰è¿”å›1å°±å¯ä»¥å‘é€gcæ“ä½œ
+*å¦‚æœæœ‰è¿”å›0ï¼Œå°±ä¸èƒ½æ‰§è¡Œgcæ“ä½œï¼Œgcæ“ä½œè¢«ä¸­æ–­
 ***********************************************************/
 int decide_gc_invoke(struct ssd_info *ssd, unsigned int channel)      
 {
 	struct sub_request *sub;
 	struct local *location;
 
-	if ((ssd->channel_head[channel].subs_r_head==NULL)&&(ssd->channel_head[channel].subs_w_head==NULL))    /*ÕâÀï²éÕÒ¶ÁĞ´×ÓÇëÇóÊÇ·ñĞèÒªÕ¼ÓÃÕâ¸öchannel£¬²»ÓÃµÄ»°²ÅÄÜÖ´ĞĞGC²Ù×÷*/
+	if ((ssd->channel_head[channel].subs_r_head==NULL)&&(ssd->channel_head[channel].subs_w_head==NULL))    /*è¿™é‡ŒæŸ¥æ‰¾è¯»å†™å­è¯·æ±‚æ˜¯å¦éœ€è¦å ç”¨è¿™ä¸ªchannelï¼Œä¸ç”¨çš„è¯æ‰èƒ½æ‰§è¡ŒGCæ“ä½œ*/
 	{
-		return 1;                                                                        /*±íÊ¾µ±Ç°Ê±¼äÕâ¸öchannelÃ»ÓĞ×ÓÇëÇóĞèÒªÕ¼ÓÃchannel*/
+		return 1;                                                                        /*è¡¨ç¤ºå½“å‰æ—¶é—´è¿™ä¸ªchannelæ²¡æœ‰å­è¯·æ±‚éœ€è¦å ç”¨channel*/
 	}
 	else
 	{
@@ -1400,7 +1400,7 @@ int decide_gc_invoke(struct ssd_info *ssd, unsigned int channel)
 			sub=ssd->channel_head[channel].subs_r_head;
 			while (sub!=NULL)
 			{
-				if (sub->current_state==SR_WAIT)                                         /*Õâ¸ö¶ÁÇëÇóÊÇ´¦ÓÚµÈ´ı×´Ì¬£¬Èç¹ûËûµÄÄ¿±êdie´¦ÓÚidle£¬Ôò²»ÄÜÖ´ĞĞgc²Ù×÷£¬·µ»Ø0*/
+				if (sub->current_state==SR_WAIT)                                         /*è¿™ä¸ªè¯»è¯·æ±‚æ˜¯å¤„äºç­‰å¾…çŠ¶æ€ï¼Œå¦‚æœä»–çš„ç›®æ ‡dieå¤„äºidleï¼Œåˆ™ä¸èƒ½æ‰§è¡Œgcæ“ä½œï¼Œè¿”å›0*/
 				{
 					location=find_location(ssd,sub->ppn);
 					if ((ssd->channel_head[location->channel].chip_head[location->chip].current_state==CHIP_IDLE)||((ssd->channel_head[location->channel].chip_head[location->chip].next_state==CHIP_IDLE)&&

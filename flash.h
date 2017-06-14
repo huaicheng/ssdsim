@@ -2,7 +2,7 @@
 This project was supported by the National Basic Research 973 Program of China under Grant No.2011CB302301
 Huazhong University of Science and Technology (HUST)   Wuhan National Laboratory for Optoelectronics
 
-FileName£º flash.h
+FileNameï¼š flash.h
 Author: Hu Yang		Version: 2.1	Date:2011/12/02
 Description: 
 
@@ -28,7 +28,7 @@ struct ssd_info *insert2buffer(struct ssd_info *,unsigned int,int,struct sub_req
 struct ssd_info *flash_page_state_modify(struct ssd_info *,struct sub_request *,unsigned int,unsigned int,unsigned int,unsigned int,unsigned int,unsigned int);
 struct ssd_info *make_same_level(struct ssd_info *,unsigned int,unsigned int,unsigned int,unsigned int,unsigned int,unsigned int);
 int find_level_page(struct ssd_info *,unsigned int,unsigned int,unsigned int,struct sub_request *,struct sub_request *);
-int make_level_page(struct ssd_info * ssd, struct sub_request * sub0,struct sub_request * sub1);//Îªsub1·ÖÅäÓësub0ÏàÍ¬Î»ÖÃµÄÒ³
+int make_level_page(struct ssd_info * ssd, struct sub_request * sub0,struct sub_request * sub1);//ä¸ºsub1åˆ†é…ä¸sub0ç›¸åŒä½ç½®çš„é¡µ
 struct ssd_info *compute_serve_time(struct ssd_info *ssd,unsigned int channel,unsigned int chip,unsigned int die,struct sub_request **subs,unsigned int subs_count,unsigned int command);
 int get_ppn_for_advanced_commands(struct ssd_info *ssd,unsigned int channel,unsigned int chip,struct sub_request * * subs ,unsigned int subs_count,unsigned int command);
 int get_ppn_for_normal_command(struct ssd_info * ssd, unsigned int channel,unsigned int chip,struct sub_request * sub);

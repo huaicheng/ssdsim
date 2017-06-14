@@ -2,7 +2,7 @@
 This project was supported by the National Basic Research 973 Program of China under Grant No.2011CB302301
 Huazhong University of Science and Technology (HUST)   Wuhan National Laboratory for Optoelectronics
 
-FileName£º initialize.c
+FileNameï¼š initialize.c
 Author: Hu Yang		Version: 2.1	Date:2011/12/02
 Description: 
 
@@ -101,19 +101,19 @@ struct ssd_info *initiation(struct ssd_info *ssd)
 	strncpy(ssd->statisticfilename,"statistic10.dat",16);
 	strncpy(ssd->statisticfilename2,"statistic2.dat",15);
 
-	//µ¼ÈëssdµÄÅäÖÃÎÄ¼þ
+	//å¯¼å…¥ssdçš„é…ç½®æ–‡ä»¶
 	parameters=load_parameters(ssd->parameterfilename);
 	ssd->parameter=parameters;
 	ssd->min_lsn=0x7fffffff;
 	ssd->page=ssd->parameter->chip_num*ssd->parameter->die_chip*ssd->parameter->plane_die*ssd->parameter->block_plane*ssd->parameter->page_block;
 
-	//³õÊ¼»¯ dram
+	//åˆå§‹åŒ– dram
 	ssd->dram = (struct dram_info *)malloc(sizeof(struct dram_info));
 	alloc_assert(ssd->dram,"ssd->dram");
 	memset(ssd->dram,0,sizeof(struct dram_info));
 	initialize_dram(ssd);
 
-	//³õÊ¼»¯Í¨µÀ
+	//åˆå§‹åŒ–é€šé“
 	ssd->channel_head=(struct channel_info*)malloc(ssd->parameter->channel_number * sizeof(struct channel_info));
 	alloc_assert(ssd->channel_head,"ssd->channel_head");
 	memset(ssd->channel_head,0,ssd->parameter->channel_number * sizeof(struct channel_info));
@@ -196,7 +196,7 @@ struct dram_info * initialize_dram(struct ssd_info * ssd)
 
 	page_num = ssd->parameter->page_block*ssd->parameter->block_plane*ssd->parameter->plane_die*ssd->parameter->die_chip*ssd->parameter->chip_num;
 
-	dram->map->map_entry = (struct entry *)malloc(sizeof(struct entry) * page_num); //Ã¿¸öÎïÀíÒ³ºÍÂß¼­Ò³¶¼ÓÐ¶ÔÓ¦¹ØÏµ
+	dram->map->map_entry = (struct entry *)malloc(sizeof(struct entry) * page_num); //æ¯ä¸ªç‰©ç†é¡µå’Œé€»è¾‘é¡µéƒ½æœ‰å¯¹åº”å…³ç³»
 	alloc_assert(dram->map->map_entry,"dram->map->map_entry");
 	memset(dram->map->map_entry,0,sizeof(struct entry) * page_num);
 	
@@ -237,7 +237,7 @@ struct plane_info * initialize_plane(struct plane_info * p_plane,struct paramete
 {
 	unsigned int i;
 	struct blk_info * p_block;
-	p_plane->add_reg_ppn = -1;  //plane ÀïÃæµÄ¶îÍâ¼Ä´æÆ÷additional register -1 ±íÊ¾ÎÞÊý¾Ý
+	p_plane->add_reg_ppn = -1;  //plane é‡Œé¢çš„é¢å¤–å¯„å­˜å™¨additional register -1 è¡¨ç¤ºæ— æ•°æ®
 	p_plane->free_page=parameter->block_plane*parameter->page_block;
 
 	p_plane->blk_head = (struct blk_info *)malloc(parameter->block_plane * sizeof(struct blk_info));
@@ -336,7 +336,7 @@ struct ssd_info * initialize_channels(struct ssd_info * ssd )
 
 
 /*************************************************
-*½«page.parametersÀïÃæµÄ²ÎÊýµ¼Èëµ½ssd->parameterÀï
+*å°†page.parametersé‡Œé¢çš„å‚æ•°å¯¼å…¥åˆ°ssd->parameteré‡Œ
 *modify by zhouwen
 *November 8,2011
 **************************************************/

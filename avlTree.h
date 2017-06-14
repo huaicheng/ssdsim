@@ -28,12 +28,12 @@ typedef struct _AVL_TREE_NODE
 	struct _AVL_TREE_NODE *tree_root;
 	struct _AVL_TREE_NODE *left_child;
 	struct _AVL_TREE_NODE *right_child;
-	int  bf;    			                     /*Æ½ºâÒò×Ó£»µ±Æ½ºâÒò×ÓµÄ¾ø¶ÔÖµ´óÓÚ »òµÈÓÚ2µÄÊ±ºò¾Í±íÊ¾Ê÷²»Æ½ºâ(balance_factor)*/
+	int  bf;    			                     /*å¹³è¡¡å› å­ï¼›å½“å¹³è¡¡å› å­çš„ç»å¯¹å€¼å¤§äº æˆ–ç­‰äº2çš„æ—¶å€™å°±è¡¨ç¤ºæ ‘ä¸å¹³è¡¡(balance_factor)*/
 }TREE_NODE;
 
 typedef struct buffer_info
 {
-	unsigned long read_hit;                      /*ÕâÀïµÄhit¶¼±íÊ¾sectorµÄÃüÖĞ´ÎÊı»òÊÇÃ»ÃüÖĞµÄ´ÎÊı*/
+	unsigned long read_hit;                      /*è¿™é‡Œçš„hitéƒ½è¡¨ç¤ºsectorçš„å‘½ä¸­æ¬¡æ•°æˆ–æ˜¯æ²¡å‘½ä¸­çš„æ¬¡æ•°*/
 	unsigned long read_miss_hit;  
 	unsigned long write_hit;   
 	unsigned long write_miss_hit;
@@ -49,7 +49,7 @@ typedef struct buffer_info
 	TREE_NODE	*pListHeader;
 	TREE_NODE	*pListTail;
 #endif
-	unsigned int	count;		                 /*AVLÊ÷ÀïµÄ½Úµã×ÜÊı*/
+	unsigned int	count;		                 /*AVLæ ‘é‡Œçš„èŠ‚ç‚¹æ€»æ•°*/
 	int 			(*keyCompare)(TREE_NODE * , TREE_NODE *);
 	int			(*free)(TREE_NODE *);
 } tAVLTree;
