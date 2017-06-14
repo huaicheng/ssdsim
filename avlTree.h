@@ -22,36 +22,36 @@
 typedef struct _AVL_TREE_NODE
 {
 #ifdef ORDER_LIST_WANTED
-	struct _AVL_TREE_NODE *prev;
-	struct _AVL_TREE_NODE *next;
+    struct _AVL_TREE_NODE *prev;
+    struct _AVL_TREE_NODE *next;
 #endif
-	struct _AVL_TREE_NODE *tree_root;
-	struct _AVL_TREE_NODE *left_child;
-	struct _AVL_TREE_NODE *right_child;
-	int  bf;    			                     /*平衡因子；当平衡因子的绝对值大于 或等于2的时候就表示树不平衡(balance_factor)*/
+    struct _AVL_TREE_NODE *tree_root;
+    struct _AVL_TREE_NODE *left_child;
+    struct _AVL_TREE_NODE *right_child;
+    int  bf;    			                     /*平衡因子；当平衡因子的绝对值大于 或等于2的时候就表示树不平衡(balance_factor)*/
 }TREE_NODE;
 
 typedef struct buffer_info
 {
-	unsigned long read_hit;                      /*这里的hit都表示sector的命中次数或是没命中的次数*/
-	unsigned long read_miss_hit;  
-	unsigned long write_hit;   
-	unsigned long write_miss_hit;
+    unsigned long read_hit;                      /*这里的hit都表示sector的命中次数或是没命中的次数*/
+    unsigned long read_miss_hit;  
+    unsigned long write_hit;   
+    unsigned long write_miss_hit;
 
-	struct buffer_group *buffer_head;            /*as LRU head which is most recently used*/
-	struct buffer_group *buffer_tail;            /*as LRU tail which is least recently used*/
-	TREE_NODE	*pTreeHeader;     				 /*for search target lsn is LRU table*/
+    struct buffer_group *buffer_head;            /*as LRU head which is most recently used*/
+    struct buffer_group *buffer_tail;            /*as LRU tail which is least recently used*/
+    TREE_NODE	*pTreeHeader;     				 /*for search target lsn is LRU table*/
 
-	unsigned int max_buffer_sector;
-	unsigned int buffer_sector_count;
+    unsigned int max_buffer_sector;
+    unsigned int buffer_sector_count;
 
 #ifdef ORDER_LIST_WANTED
-	TREE_NODE	*pListHeader;
-	TREE_NODE	*pListTail;
+    TREE_NODE	*pListHeader;
+    TREE_NODE	*pListTail;
 #endif
-	unsigned int	count;		                 /*AVL树里的节点总数*/
-	int 			(*keyCompare)(TREE_NODE * , TREE_NODE *);
-	int			(*free)(TREE_NODE *);
+    unsigned int	count;		                 /*AVL树里的节点总数*/
+    int 			(*keyCompare)(TREE_NODE * , TREE_NODE *);
+    int			(*free)(TREE_NODE *);
 } tAVLTree;
 
 
